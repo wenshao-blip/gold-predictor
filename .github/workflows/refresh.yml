@@ -1,0 +1,48 @@
+# 手动刷新 — 面板"立即刷新"按钮触发
+# 盘中想看最新行情，触发采集最新金价 → 更新面板
+name: 手动刷新
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manual-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+          pip install yfinance openpyxl requests
+
+      - name: 环境变量
+        run: |
+          echo "TZ=Asia/Shanghai" >> $GITHUB_ENV
+
+      - name: 采集最新金价并更新面板
+        run: python scripts/refresh.py
+
+      - name: 提交变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/dashboard.html || true
+          git diff --staged --quiet || git commit -m "手动刷新实时金价 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

@@ -1,0 +1,52 @@
+# 午后复核 — 15:35 北京时间（UTC 07:35）
+# 只更新实时价和追踪状态，不推翻早上的预测
+name: 午后复核
+
+on:
+  schedule:
+    # UTC 07:35 = 北京时间 15:35
+    - cron: '35 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: afternoon-review
+  cancel-in-progress: false
+
+jobs:
+  afternoon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+          pip install yfinance openpyxl requests
+
+      - name: 环境变量
+        run: |
+          echo "TZ=Asia/Shanghai" >> $GITHUB_ENV
+
+      - name: 刷新实时金价
+        run: python scripts/refresh.py
+        continue-on-error: true
+
+      - name: 提交变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/dashboard.html || true
+          git diff --staged --quiet || git commit -m "午后复核刷新实时金价 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

@@ -1,0 +1,72 @@
+# 晨间流水线 — 06:30 北京时间（UTC 22:30 前一天）
+# 流程: 结算昨日 → 采集今日 → 模型推理 → 部署面板
+name: 晨间流水线
+
+on:
+  schedule:
+    # UTC 22:30 = 北京时间 06:30（次日）
+    - cron: '30 22 * * *'
+  workflow_dispatch: # 支持手动触发
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: morning-pipeline
+  cancel-in-progress: false
+
+jobs:
+  morning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+          pip install yfinance openpyxl requests
+
+      - name: 环境变量
+        run: |
+          echo "TZ=Asia/Shanghai" >> $GITHUB_ENV
+          echo "TAVILY_API_KEY=${{ secrets.TAVILY_API_KEY }}" >> $GITHUB_ENV
+          echo "LLM_API_KEY=${{ secrets.LLM_API_KEY }}" >> $GITHUB_ENV
+          echo "LLM_BASE_URL=${{ secrets.LLM_BASE_URL }}" >> $GITHUB_ENV
+          echo "LLM_MODEL=${{ secrets.LLM_MODEL }}" >> $GITHUB_ENV
+
+      - name: 1/4 结算昨日预测
+        run: python scripts/settle.py
+        continue-on-error: true
+
+      - name: 2/4 采集今日数据
+        run: python scripts/collect.py
+        continue-on-error: true
+
+      - name: 3/4 模型推理
+        run: python scripts/predict.py
+        continue-on-error: true
+
+      - name: 4/4 部署面板
+        run: python scripts/deploy.py
+
+      - name: 检查置信度校准
+        run: python scripts/calibration.py
+        continue-on-error: true
+
+      - name: 提交变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add log.xlsx dashboard/dashboard.html data/ || true
+          git diff --staged --quiet || git commit -m "晨间流水线自动更新 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
