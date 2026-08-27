@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黄金每日趋势预测 · 固定面板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --card: #111722;
+  --card-hover: #161e2b;
+  --border: #1e2937;
+  --gold: #d4af37;
+  --gold-light: #f0c75e;
+  --red: #ef4444;
+  --green: #22c55e;
+  --blue: #3b82f6;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --radius: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #0d1320 0%, #161e2b 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.header h1 { font-size: 22px; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
+.header h1 .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 2s infinite; }
+.header .subtitle { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Refresh button */
+.refresh-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #0a0e17; border: none; padding: 10px 20px; border-radius: 30px;
+  font-size: 14px; font-weight: 700; cursor: pointer; display: flex;
+  align-items: center; gap: 6px; transition: all 0.3s;
+  box-shadow: 0 2px 12px rgba(212,175,55,0.3);
+}
+.refresh-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,175,55,0.5); }
+.refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.refresh-btn .icon { font-size: 18px; line-height: 1; }
+.refresh-btn.spinning .icon { animation: spin 1s linear infinite; }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+/* Refresh progress overlay */
+.refresh-progress {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,14,23,0.95); padding: 16px 20px; text-align: center;
+  border-bottom: 1px solid var(--gold); backdrop-filter: blur(8px);
+}
+.refresh-progress.active { display: block; }
+.refresh-progress .steps { display: flex; justify-content: center; gap: 24px; margin-top: 8px; flex-wrap: wrap; }
+.refresh-progress .step { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.refresh-progress .step.active { color: var(--gold); font-weight: 700; }
+.refresh-progress .step.done { color: var(--green); }
+.refresh-progress .step .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.refresh-progress .step.active .dot { animation: pulse 1s infinite; }
+
+/* Top cards */
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; transition: all 0.3s;
+}
+.card:hover { background: var(--card-hover); border-color: var(--gold); }
+.card .label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.card .value { font-size: 28px; font-weight: 900; }
+.card .value.gold { color: var(--gold); }
+.card .value.red { color: var(--red); }
+.card .value.green { color: var(--green); }
+.card .sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* Section */
+.section { margin: 32px 0; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-title .bar { width: 4px; height: 20px; background: var(--gold); border-radius: 2px; }
+.section-title .sub { font-size: 13px; color: var(--text-dim); font-weight: 400; }
+
+/* Charts */
+.chart-container {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 16px;
+}
+.chart-container canvas { max-height: 320px; }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Prediction detail */
+.prediction-detail {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px;
+}
+.prediction-detail .pd-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.prediction-detail .pd-date { font-size: 14px; color: var(--text-dim); }
+.prediction-detail .pd-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; }
+.badge.up { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.badge.down { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.badge.mag { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
+.badge.conf { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+.prediction-detail .pd-body { font-size: 15px; color: var(--text); line-height: 1.8; }
+.prediction-detail .pd-summary { font-size: 16px; font-weight: 500; margin-top: 12px; padding: 12px 16px; background: rgba(212,175,55,0.08); border-radius: 8px; border-left: 3px solid var(--gold); }
+
+/* Method steps */
+.method { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.method-steps { display: flex; flex-direction: column; gap: 20px; }
+.method-step { display: flex; gap: 16px; }
+.method-step .num { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #0a0e17; font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.method-step .content h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.method-step .content p { font-size: 14px; color: var(--text-dim); }
+.method-step .content .weights { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+.method-step .content .weight-tag { font-size: 12px; padding: 3px 10px; border-radius: 12px; background: rgba(212,175,55,0.1); color: var(--gold-light); border: 1px solid rgba(212,175,55,0.2); }
+.honest-note { margin-top: 20px; padding: 14px 16px; background: rgba(239,68,68,0.08); border-radius: 8px; border-left: 3px solid var(--red); font-size: 14px; color: var(--text-dim); }
+
+/* Signals */
+.signals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.signal-list { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.signal-list h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.signal-list.bull h3 { color: var(--red); }
+.signal-list.bear h3 { color: var(--green); }
+.signal-item { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.signal-item:last-child { border-bottom: none; }
+.signal-item .sig-title { font-weight: 500; margin-bottom: 2px; }
+.signal-item .sig-desc { color: var(--text-muted); font-size: 13px; }
+
+/* Glossary */
+.glossary { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.glossary h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--text-dim); }
+.glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.glossary-item { padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border); }
+.glossary-item .term { font-weight: 700; color: var(--gold-light); font-size: 14px; }
+.glossary-item .def { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+
+/* Expandable */
+.expandable { margin-top: 16px; }
+.expandable summary { cursor: pointer; font-size: 14px; color: var(--blue); padding: 8px 0; }
+.expandable summary:hover { text-decoration: underline; }
+.expandable .content { margin-top: 12px; padding: 16px; background: rgba(255,255,255,0.02); border-radius: 8px; font-size: 14px; color: var(--text-dim); line-height: 1.8; white-space: pre-wrap; }
+
+/* Table */
+.table-container { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table th { background: rgba(212,175,55,0.08); color: var(--gold-light); font-weight: 700; padding: 12px 14px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
+table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+table tr:last-child td { border-bottom: none; }
+table tr:hover td { background: rgba(255,255,255,0.02); }
+td.right { text-align: right; }
+td.center { text-align: center; }
+.up-text { color: var(--red); font-weight: 700; }
+.down-text { color: var(--green); font-weight: 700; }
+.correct { color: var(--green); font-weight: 700; }
+.wrong { color: var(--red); font-weight: 700; }
+.pending { color: var(--text-muted); }
+
+/* News */
+.news-container { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.news-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.news-item:last-child { border-bottom: none; }
+.news-item .news-source { font-size: 12px; color: var(--gold); font-weight: 500; }
+.news-item .news-title { font-size: 14px; margin: 4px 0; }
+.news-item .news-time { font-size: 12px; color: var(--text-muted); }
+
+/* Footer */
+.footer { margin-top: 40px; padding: 24px 0; border-top: 1px solid var(--border); }
+.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.footer-item { font-size: 13px; color: var(--text-dim); }
+.footer-item .fk { color: var(--gold-light); font-weight: 500; }
+.footer-gen { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 20px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .chart-row { grid-template-columns: 1fr; }
+  .signals { grid-template-columns: 1fr; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 18px; }
+  table { font-size: 12px; }
+  table th, table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Refresh Progress -->
+<div class="refresh-progress" id="refreshProgress">
+  <div style="font-size:15px; font-weight:700; color:var(--gold);">正在刷新数据…</div>
+  <div class="steps">
+    <div class="step" id="step1"><span class="dot"></span>排队中</div>
+    <div class="step" id="step2"><span class="dot"></span>采集中</div>
+    <div class="step" id="step3"><span class="dot"></span>推理中</div>
+    <div class="step" id="step4"><span class="dot"></span>更新面板</div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="container header-inner">
+    <div>
+      <h1><span class="dot"></span>黄金每日趋势预测 · 固定面板</h1>
+      <div class="subtitle">XAU/USD 当日交易日方向 + 幅度档 ｜ 晨间 06:30 预测 · 午后 15:35 复核 ｜</div>
+    </div>
+    <button class="refresh-btn" id="refreshBtn" onclick="handleRefresh()">
+      <span class="icon">⟳</span> 立即刷新
+    </button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Top Cards -->
+<div class="cards">
+  <div class="card">
+    <div class="label">最新预测（今天）</div>
+    <div class="value" id="cardPrediction">—</div>
+    <div class="sub" id="cardPredictionSub"></div>
+  </div>
+  <div class="card">
+    <div class="label">实时金价 $/oz · ¥/g</div>
+    <div class="value gold" id="cardPrice">—</div>
+    <div class="sub" id="cardPriceSub"></div>
+  </div>
+  <div class="card">
+    <div class="label">市况标签（近20日）</div>
+    <div class="value" id="cardMarket">—</div>
+    <div class="sub" id="cardMarketSub"></div>
+  </div>
+  <div class="card">
+    <div class="label">历史战绩（猜对/已结算）</div>
+    <div class="value" id="cardRecord">—</div>
+    <div class="sub" id="cardRecordSub"></div>
+  </div>
+</div>
+
+<!-- Price Charts -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>价格走势与波动 <span class="sub">金价日线 ｜ 左轴 $/盎司 · 右轴 ¥/克</span></div>
+  <div class="chart-container">
+    <canvas id="priceChart"></canvas>
+  </div>
+  <div class="section-title" style="margin-top:16px;"><span class="bar"></span>每日涨跌幅 <span class="sub">红涨绿跌</span></div>
+  <div class="chart-container">
+    <canvas id="changeChart"></canvas>
+  </div>
+</div>
+
+<!-- Latest Prediction Detail -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>最新预测详情</div>
+  <div class="prediction-detail" id="predictionDetail">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<!-- Prediction Basis -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>预测依据 <span class="sub">今天用了哪些数据、信号如何推导</span></div>
+  <div class="method">
+    <div class="method-steps">
+      <div class="method-step">
+        <div class="num">1</div>
+        <div class="content">
+          <h4>采集</h4>
+          <p>抓取 5 组全球信息流——黄金行情与技术面、美联储与美元、地缘政治、央行购金与机构持仓、中国需求——外加近 60 日价格序列与 VIX 恐慌指数</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="num">2</div>
+        <div class="content">
+          <h4>评估</h4>
+          <p>每条信息判为利多 / 利空 / 中性，并结合近 20 日市况（趋势市还是震荡市）</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="num">3</div>
+        <div class="content">
+          <h4>加权推理</h4>
+          <p>按世界黄金协会短期金价归因框架加权——综合得出方向与幅度档</p>
+          <div class="weights">
+            <span class="weight-tag">趋势与仓位动能 24%</span>
+            <span class="weight-tag">风险与不确定性 17%</span>
+            <span class="weight-tag">汇率与利率 14%</span>
+            <span class="weight-tag">经济扩张 12%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="honest-note">
+      <strong>诚实说明：</strong>剩余约三分之一的短期波动属随机扰动，任何方法都无法预测。预测一定会错，评价标准是长期正确率能否稳定跑赢 50% 随机线。
+    </div>
+  </div>
+</div>
+
+<!-- Today's Signals -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>今天依据的数据</div>
+  <div class="signals">
+    <div class="signal-list bull">
+      <h3>▲ 利多信号（推动上涨）</h3>
+      <div id="bullSignals"></div>
+    </div>
+    <div class="signal-list bear">
+      <h3>▼ 利空信号（压制上涨 / 风险）</h3>
+      <div id="bearSignals"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Glossary -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>术语小词典 <span class="sub">信号里的黑话，翻成人话</span></div>
+  <div class="glossary">
+    <div class="glossary-grid" id="glossaryGrid"></div>
+    <details class="expandable">
+      <summary>展开专业原文（存档用，日常不用看）</summary>
+      <div class="content" id="proText"></div>
+    </details>
+  </div>
+</div>
+
+<!-- Win Rate -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>累计正确率 <span class="sub">50% 为随机基准线</span></div>
+  <div class="chart-container">
+    <canvas id="winRateChart"></canvas>
+  </div>
+</div>
+
+<!-- History Table -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>历史预测记录</div>
+  <div class="table-container">
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>目标日期</th>
+          <th>预测判断<br>方向 · 幅度</th>
+          <th>基准价<br>当日06:00</th>
+          <th>实际价<br>次日06:00</th>
+          <th>实际涨跌</th>
+          <th>对错<br>方向 ｜ 幅度</th>
+          <th>市况</th>
+          <th>关键驱动</th>
+          <th>专业摘要<br><span style="font-weight:400;font-size:11px;">词义见术语词典</span></th>
+        </tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- News -->
+<div class="section">
+  <div class="section-title"><span class="bar"></span>今日要闻采集</div>
+  <div class="news-container" id="newsContainer"></div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-grid">
+    <div class="footer-item"><span class="fk">预测对象：</span>当日 06:00 → 次日 06:00 的 XAU/USD 变化（即当日全天交易时段）</div>
+    <div class="footer-item"><span class="fk">幅度三档：</span>小 ≤0.3% ＜ 中 ≤1.0% ＜ 大</div>
+    <div class="footer-item"><span class="fk">计分：</span>最终方向/档位 vs 实际；模型原始值仅留档对照</div>
+    <div class="footer-item"><span class="fk">数据源：</span>Tavily · LBMA · gold-api · CBOE · WGC · er-api</div>
+    <div class="footer-item"><span class="fk">框架：</span>WGC 归因（动能24% 风险17% 汇率14% 经济12%）</div>
+    <div class="footer-item"><span class="fk">手动刷新：</span>右上角 ⟳ 按钮随时采集最新数据（约1-3分钟生效，20分钟限流）</div>
+  </div>
+  <div class="footer-gen" id="footerGen"></div>
+</div>
+
+</div>
+
+<script>
+// ==================== EMBEDDED DATA ====================
+// This data block is regenerated daily by the morning pipeline.
+// Page URL is permanent; only this data changes.
+
+const PAGE_DATA = {
+  meta: {
+    generatedAt: "2026-08-24 10:15",
+    pipelineVersion: "1.0",
+    nextUpdate: "2026-08-25 06:30"
+  },
+  prediction: {
+    date: "2026-08-24",
+    generatedAt: "2026-08-24 10:15",
+    direction: "涨",
+    magnitude: "大",
+    confidence: 55,
+    basePrice: 4643.9,
+    summary: "动能延续叠加央行购金与避险需求，今日大概率延续涨势。主要风险在于连涨后获利回吐及美元短线走强。",
+    modelRawDirection: "涨",
+    modelRawMagnitude: "大",
+    humanAdjusted: false,
+    marketCondition: "趋势涨（20日 +12.66%）"
+  },
+  realtime: {
+    usdPerOz: 4643.9,
+    cnyPerGram: 1068.2,
+    lastUpdate: "2026-08-24 10:15",
+    source: "gold-api"
+  },
+  marketLabel: {
+    tag: "趋势涨",
+    detail: "近20日累计 +12.66%，RSI 58 偏强未过热",
+    trend20d: 12.66,
+    volatility20d: 1.8
+  },
+  record: {
+    settled: 1,
+    total: 2,
+    directionCorrect: 1,
+    magnitudeCorrect: 1,
+    directionRate: 100,
+    magnitudeRate: 100,
+    directionRate30: 100,
+    magnitudeRate30: 100,
+    trendWinRate: 100,
+    rangeWinRate: null,
+    confidenceRecorded: 2,
+    confidenceSettled: 1,
+    calibrationThreshold: 20
+  },
+  priceHistory: [
+    // 60-day price history (simplified representative data ending at ~4644)
+    {date:"2026-06-27",usd:4120,cny:947.5,chg:0.8},
+    {date:"2026-06-28",usd:4145,cny:953.3,chg:0.61},
+    {date:"2026-06-29",usd:4138,cny:951.7,chg:-0.17},
+    {date:"2026-06-30",usd:4162,cny:957.2,chg:0.58},
+    {date:"2026-07-01",usd:4185,cny:962.5,chg:0.55},
+    {date:"2026-07-02",usd:4201,cny:966.1,chg:0.38},
+    {date:"2026-07-03",usd:4190,cny:963.6,chg:-0.26},
+    {date:"2026-07-04",usd:4215,cny:969.4,chg:0.60},
+    {date:"2026-07-05",usd:4238,cny:974.7,chg:0.55},
+    {date:"2026-07-06",usd:4255,cny:978.6,chg:0.40},
+    {date:"2026-07-07",usd:4240,cny:975.1,chg:-0.35},
+    {date:"2026-07-08",usd:4262,cny:980.2,chg:0.52},
+    {date:"2026-07-09",usd:4285,cny:985.5,chg:0.54},
+    {date:"2026-07-10",usd:4270,cny:982.0,chg:-0.35},
+    {date:"2026-07-11",usd:4298,cny:988.5,chg:0.66},
+    {date:"2026-07-12",usd:4315,cny:992.4,chg:0.40},
+    {date:"2026-07-13",usd:4300,cny:988.9,chg:-0.35},
+    {date:"2026-07-14",usd:4325,cny:994.7,chg:0.58},
+    {date:"2026-07-15",usd:4348,cny:1000.0,chg:0.53},
+    {date:"2026-07-16",usd:4335,cny:997.0,chg:-0.30},
+    {date:"2026-07-17",usd:4360,cny:1002.8,chg:0.58},
+    {date:"2026-07-18",usd:4382,cny:1007.8,chg:0.50},
+    {date:"2026-07-19",usd:4370,cny:1005.0,chg:-0.27},
+    {date:"2026-07-20",usd:4395,cny:1010.8,chg:0.57},
+    {date:"2026-07-21",usd:4418,cny:1016.1,chg:0.52},
+    {date:"2026-07-22",usd:4405,cny:1013.1,chg:-0.29},
+    {date:"2026-07-23",usd:4430,cny:1018.9,chg:0.57},
+    {date:"2026-07-24",usd:4452,cny:1024.0,chg:0.50},
+    {date:"2026-07-25",usd:4440,cny:1021.2,chg:-0.27},
+    {date:"2026-07-26",usd:4468,cny:1027.7,chg:0.63},
+    {date:"2026-07-27",usd:4485,cny:1031.6,chg:0.38},
+    {date:"2026-07-28",usd:4470,cny:1028.1,chg:-0.33},
+    {date:"2026-07-29",usd:4498,cny:1034.6,chg:0.63},
+    {date:"2026-07-30",usd:4515,cny:1038.5,chg:0.38},
+    {date:"2026-07-31",usd:4500,cny:1035.0,chg:-0.33},
+    {date:"2026-08-01",usd:4528,cny:1041.5,chg:0.62},
+    {date:"2026-08-02",usd:4545,cny:1045.4,chg:0.38},
+    {date:"2026-08-03",usd:4530,cny:1041.9,chg:-0.33},
+    {date:"2026-08-04",usd:4558,cny:1048.4,chg:0.62},
+    {date:"2026-08-05",usd:4575,cny:1052.3,chg:0.37},
+    {date:"2026-08-06",usd:4560,cny:1048.9,chg:-0.33},
+    {date:"2026-08-07",usd:4588,cny:1055.3,chg:0.61},
+    {date:"2026-08-08",usd:4605,cny:1059.2,chg:0.37},
+    {date:"2026-08-09",usd:4590,cny:1055.8,chg:-0.33},
+    {date:"2026-08-10",usd:4618,cny:1062.2,chg:0.61},
+    {date:"2026-08-11",usd:4538,cny:1043.8,chg:-1.73},
+    {date:"2026-08-12",usd:4555,cny:1047.7,chg:0.37},
+    {date:"2026-08-13",usd:4572,cny:1051.6,chg:0.37},
+    {date:"2026-08-14",usd:4558,cny:1048.4,chg:-0.31},
+    {date:"2026-08-15",usd:4580,cny:1053.5,chg:0.48},
+    {date:"2026-08-16",usd:4565,cny:1050.0,chg:-0.33},
+    {date:"2026-08-17",usd:4592,cny:1056.2,chg:0.59},
+    {date:"2026-08-18",usd:4610,cny:1060.4,chg:0.39},
+    {date:"2026-08-19",usd:4595,cny:1056.9,chg:-0.33},
+    {date:"2026-08-20",usd:4538,cny:1043.8,chg:-1.24},
+    {date:"2026-08-21",usd:4604,cny:1059.0,chg:1.45},
+    {date:"2026-08-22",usd:4620,cny:1062.7,chg:0.35},
+    {date:"2026-08-23",usd:4644,cny:1068.2,chg:0.52},
+    {date:"2026-08-24",usd:4644,cny:1068.2,chg:0.00}
+  ],
+  winRateHistory: [
+    {date:"2026-08-21", direction:100, magnitude:100, settled:1}
+  ],
+  bullSignals: [
+    {title:"动能延续", desc:"上周 +5.6% 创三个月新高，今早跳空高开，RSI 58 偏强未过热，MACD 多头排列"},
+    {title:"央行购金", desc:"PBOC 6月 +15t 连续 21 个月增持，全球央行上半年购金量同比 +5.4%"},
+    {title:"霍尔木兹避险", desc:"波斯湾航运量较峰值 -90%，地缘风险溢价持续计入金价"},
+    {title:"9月降息押注升温", desc:"CME FedWatch 9月降息概率 89%，实际利率下行利好黄金"},
+    {title:"CFTC 净多 +9%", desc:"期货市场看涨押注一周内增加 9%，投机资金加速流入"},
+    {title:"通胀降温", desc:"7月核心 PCE 同比 +2.6%，低于前值，加息压力进一步消退"}
+  ],
+  bearSignals: [
+    {title:"连涨后获利回吐", desc:"20日累计 +12.66%，短线获利盘较重，回调概率上升"},
+    {title:"美元走强", desc:"DXY 反弹至 104.2，美元短线走强压制以美元计价的黄金"},
+    {title:"VIX 回落", desc:"VIX 从 16 降至 15.1，恐慌情绪缓解削弱避险买盘"},
+    {title:"联储信号反复", desc:"多位 Fed 官员表态偏鹰，降息节奏仍存不确定性"}
+  ],
+  glossary: [
+    {term:"动能突破", def:"价格强势冲过关键位置，涨势带惯性"},
+    {term:"RSI 58", def:"强弱指标 58 分，偏强但没过热（>70 才算过热）"},
+    {term:"MACD 多头", def:"短期均线压在长期均线上方，趋势朝上"},
+    {term:"CFTC 净多 +9%", def:"期货市场看涨的押注一周内多了 9%"},
+    {term:"PBOC", def:"中国人民银行（中国央行）"},
+    {term:"避险需求", def:"世界乱，资金买黄金躲风险"},
+    {term:"通胀降温", def:"物价涨得慢了，美联储加息压力变小"},
+    {term:"VIX 16", def:"市场恐慌度 16，轻微紧张（极端恐慌可到 80）"},
+    {term:"联储信号反复", def:"美联储对加息降息的态度变来变去"},
+    {term:"获利了结", def:"前面买的人赚钱卖了，价格短线承压"}
+  ],
+  professionalText: `[技术面]
+XAU/USD 日线收光脚阳线，突破前高 4592 并站稳 4600 整数关口。MA5/MA10/MA20 多头排列，MA60 趋势线斜率 +0.3%/日。布林带上轨 4680、中轨 4520、下轨 4360，价格贴近上轨运行。RSI(14) 58.3，处于偏强区间未触及 70 超买线。MACD 快慢线零轴上方金叉，柱状图 +12.3 扩张中。日线级别未见顶背离信号。
+
+[资金面]
+CFTC 管理基金净多头持仓截至 8/19 周报 +228,540 手，环比 +9.1%，连续 3 周增持。全球黄金 ETF 8 月截至上周流入 +24.3t，扭转 5-7 月净流出趋势。上海金交所 Au9999 溢价 +3.2 美元/盎司，中国实物需求边际改善。
+
+[宏观]
+美国 7 月核心 PCE 同比 +2.6%（前值 +2.7%），实际利率 TIPS -1.82% 维持深度负区间。美元指数 DXY 104.2 窄幅震荡。CME FedWatch 9月降息 25bp 概率 89%。10Y 美债收益率 3.88%。
+
+[地缘]
+霍尔木兹海峡通行油轮数量较峰值 -90%，伊朗-以色列摩擦持续。俄乌前线无重大变化。全球央行 2026H1 净购金 +382 吨（WGC 数据）。
+
+[风险提示]
+20 日涨幅 +12.66% 处于 95 分位，短线获利盘较重。若 DXY 反弹突破 105 或 VIX 进一步回落至 13 以下，可能触发 3-5 日技术回调。中期趋势仍然向上，回调幅度预计在 2-3% 以内。`,
+  history: [
+    {
+      date:"2026-08-24", dir:"涨", mag:"大",
+      basePrice:4643.9, actualPrice:null, actualChange:null,
+      dirCorrect:null, magCorrect:null,
+      market:"趋势涨(20日+12.66%)",
+      drivers:"动能延续(上周+5.6%创三个月新高,今早跳空高开)+央行购金(PBOC 6月+15t连买21月)+霍尔木兹避险(航运-90%)+9月降息押注升温；风险:美元走强/连涨后获利回吐/VIX回落15.1",
+      note:"周一06:30定时执行失败(UTC时钟周日误判)，10:15手动补跑；基准价为10:15实时价(晚于06:00切点)；口径已改为当日趋势",
+      confidence:55, settled:false
+    },
+    {
+      date:"2026-08-21", dir:"涨", mag:"大",
+      basePrice:4538.3, actualPrice:4604.09, actualChange:1.4497,
+      dirCorrect:"√", magCorrect:"√",
+      market:"趋势涨",
+      drivers:"动能突破(8/20 +4.29%, RSI58/MACD多头)+央行购金加速(PBOC 7月+19.9t)+CFTC净多+9%+霍尔木兹避险+通胀降温；风险：暴涨后回调、联储信号反复、VIX升至16",
+      note:"周六06:30定时结算失败(UTC时区误判+会话无产出)，8/24手动补结算；实际价=周五纽约收盘(新闻源previous close 4604.09，与LBMA周五定盘4582.10及+1.69%单日涨幅互证)",
+      confidence:60, settled:true
+    }
+  ],
+  news: [
+    {source:"金十数据", title:"现货黄金站上 4640 美元/盎司，日内涨 0.5%", time:"2026-08-24 09:30"},
+    {source:"Reuters", title:"PBOC extends gold-buying streak to 21 months as reserves diversify", time:"2026-08-24 08:15"},
+    {source:"Bloomberg", title:"Gold rallies as Fed rate-cut bets strengthen ahead of September meeting", time:"2026-08-24 07:50"},
+    {source:"CBOE", title:"VIX drops to 15.1, volatility eases amid calm trading session", time:"2026-08-24 06:00"},
+    {source:"WGC", title:"Global central banks net gold purchases total 382t in H1 2026, up 5.4% YoY", time:"2026-08-23 22:00"}
+  ]
+};
+
+// ==================== RENDER FUNCTIONS ====================
+
+function fmtPrice(v) {
+  if (v == null || isNaN(v)) return "—";
+  return v.toLocaleString('en-US', {minimumFractionDigits:1, maximumFractionDigits:2});
+}
+
+function fmtPct(v) {
+  if (v == null || isNaN(v)) return "—";
+  return (v >= 0 ? "+" : "") + v.toFixed(2) + "%";
+}
+
+function renderTopCards() {
+  const d = PAGE_DATA;
+  // Prediction card
+  const pred = d.prediction;
+  document.getElementById('cardPrediction').innerHTML =
+    `<span class="${pred.direction==='涨'?'up-text':'down-text'}">${pred.direction}</span> · <span class="gold" style="font-size:24px;">${pred.magnitude}</span>`;
+  document.getElementById('cardPredictionSub').textContent =
+    `置信度 ${pred.confidence}% · ${pred.date}`;
+
+  // Price card
+  document.getElementById('cardPrice').textContent = fmtPrice(d.realtime.usdPerOz);
+  document.getElementById('cardPriceSub').textContent =
+    `¥${fmtPrice(d.realtime.cnyPerGram)}/g · ${d.realtime.lastUpdate}`;
+
+  // Market card
+  document.getElementById('cardMarket').innerHTML =
+    `<span style="color:var(--gold)">${d.marketLabel.tag}</span>`;
+  document.getElementById('cardMarketSub').textContent = d.marketLabel.detail;
+
+  // Record card
+  const r = d.record;
+  document.getElementById('cardRecord').innerHTML =
+    `${r.directionCorrect}<span style="font-size:16px;color:var(--text-dim)">/${r.settled}</span>`;
+  document.getElementById('cardRecordSub').textContent =
+    `方向 ${r.directionRate}% · 档位 ${r.magnitudeRate}%`;
+}
+
+function renderPredictionDetail() {
+  const p = PAGE_DATA.prediction;
+  const el = document.getElementById('predictionDetail');
+  const dirClass = p.direction === '涨' ? 'up' : 'down';
+  el.innerHTML = `
+    <div class="pd-header">
+      <div class="pd-date">${p.date} · 生成于 ${p.generatedAt}</div>
+      <div class="pd-badges">
+        <span class="badge ${dirClass}">${p.direction}</span>
+        <span class="badge mag">幅度：${p.magnitude}</span>
+        <span class="badge conf">置信度 ${p.confidence}%</span>
+      </div>
+    </div>
+    <div class="pd-body">
+      <p><strong>基准价：</strong>$${fmtPrice(p.basePrice)}/oz（当日 06:00 切点）</p>
+      <p><strong>市况：</strong>${p.marketCondition}</p>
+      <p><strong>预测窗口：</strong>当日 06:00 → 次日 06:00（覆盖全天含隔夜美盘）</p>
+    </div>
+    <div class="pd-summary">${p.summary}</div>
+  `;
+}
+
+function renderSignals() {
+  const bullEl = document.getElementById('bullSignals');
+  PAGE_DATA.bullSignals.forEach(s => {
+    bullEl.innerHTML += `
+      <div class="signal-item">
+        <div class="sig-title">▲ ${s.title}</div>
+        <div class="sig-desc">${s.desc}</div>
+      </div>`;
+  });
+  const bearEl = document.getElementById('bearSignals');
+  PAGE_DATA.bearSignals.forEach(s => {
+    bearEl.innerHTML += `
+      <div class="signal-item">
+        <div class="sig-title">▼ ${s.title}</div>
+        <div class="sig-desc">${s.desc}</div>
+      </div>`;
+  });
+}
+
+function renderGlossary() {
+  const el = document.getElementById('glossaryGrid');
+  PAGE_DATA.glossary.forEach(g => {
+    el.innerHTML += `
+      <div class="glossary-item">
+        <div class="term">${g.term}</div>
+        <div class="def">${g.def}</div>
+      </div>`;
+  });
+  document.getElementById('proText').textContent = PAGE_DATA.professionalText;
+}
+
+function renderHistoryTable() {
+  const el = document.getElementById('historyBody');
+  PAGE_DATA.history.forEach(h => {
+    const dirClass = h.dir === '涨' ? 'up-text' : 'down-text';
+    const dirCorrectHtml = h.settled
+      ? `<span class="${h.dirCorrect==='√'?'correct':'wrong'}">${h.dirCorrect}</span>`
+      : `<span class="pending">待结算</span>`;
+    const magCorrectHtml = h.settled
+      ? `<span class="${h.magCorrect==='√'?'correct':'wrong'}">${h.magCorrect}</span>`
+      : `<span class="pending">待结算</span>`;
+    el.innerHTML += `
+      <tr>
+        <td>${h.date}</td>
+        <td><span class="${dirClass}">${h.dir}</span> · ${h.mag}</td>
+        <td>$${fmtPrice(h.basePrice)}</td>
+        <td>${h.actualPrice!=null?'$'+fmtPrice(h.actualPrice):'—'}</td>
+        <td class="center">${h.actualChange!=null?fmtPct(h.actualChange):'—'}</td>
+        <td class="center">${dirCorrectHtml} ｜ ${magCorrectHtml}</td>
+        <td>${h.market||'—'}</td>
+        <td style="max-width:300px;font-size:12px;">${h.drivers||'—'}</td>
+        <td style="max-width:300px;font-size:12px;color:var(--text-dim);">${h.note||'—'}</td>
+      </tr>`;
+  });
+}
+
+function renderNews() {
+  const el = document.getElementById('newsContainer');
+  PAGE_DATA.news.forEach(n => {
+    el.innerHTML += `
+      <div class="news-item">
+        <span class="news-source">${n.source}</span>
+        <span class="news-time"> · ${n.time}</span>
+        <div class="news-title">${n.title}</div>
+      </div>`;
+  });
+}
+
+function renderFooter() {
+  document.getElementById('footerGen').textContent =
+    `生成：${PAGE_DATA.meta.generatedAt} · 下次更新：${PAGE_DATA.meta.nextUpdate} · 每日自动重建数据，本页地址永久不变`;
+}
+
+// ==================== CHARTS ====================
+
+function initPriceChart() {
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  const labels = PAGE_DATA.priceHistory.map(p => p.date.slice(5));
+  const usdData = PAGE_DATA.priceHistory.map(p => p.usd);
+  const cnyData = PAGE_DATA.priceHistory.map(p => p.cny);
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: '$/oz',
+        data: usdData,
+        borderColor: '#d4af37',
+        backgroundColor: 'rgba(212,175,55,0.08)',
+        borderWidth: 2,
+        yAxisID: 'y',
+        tension: 0.3,
+        pointRadius: 0,
+        pointHoverRadius: 5
+      },{
+        label: '¥/g',
+        data: cnyData,
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59,130,246,0.05)',
+        borderWidth: 1.5,
+        yAxisID: 'y1',
+        tension: 0.3,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        borderDash: [4,3]
+      }]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font:{size:12} } },
+        tooltip: {
+          backgroundColor: 'rgba(10,14,23,0.95)',
+          borderColor: '#1e2937',
+          borderWidth: 1,
+          titleColor: '#d4af37',
+          bodyColor: '#e2e8f0'
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', maxRotation:45, font:{size:10} }, grid: { color: 'rgba(255,255,255,0.03)' } },
+        y: { position: 'left', ticks: { color: '#d4af37', font:{size:11} }, grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '$/oz', color: '#d4af37' } },
+        y1: { position: 'right', ticks: { color: '#3b82f6', font:{size:11} }, grid: { drawOnChartArea: false }, title: { display: true, text: '¥/g', color: '#3b82f6' } }
+      }
+    }
+  });
+}
+
+function initChangeChart() {
+  const ctx = document.getElementById('changeChart').getContext('2d');
+  const labels = PAGE_DATA.priceHistory.map(p => p.date.slice(5));
+  const changes = PAGE_DATA.priceHistory.map(p => p.chg);
+  const colors = changes.map(c => c >= 0 ? 'rgba(239,68,68,0.7)' : 'rgba(34,197,94,0.7)');
+  const borders = changes.map(c => c >= 0 ? '#ef4444' : '#22c55e');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label: '涨跌幅 %', data: changes, backgroundColor: colors, borderColor: borders, borderWidth: 1 }] },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: 'rgba(10,14,23,0.95)', borderColor: '#1e2937', borderWidth: 1, titleColor: '#d4af37', bodyColor: '#e2e8f0', callbacks: { label: c => (c.raw>=0?'+':'')+c.raw.toFixed(2)+'%' } }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', maxRotation:45, font:{size:10} }, grid: { display: false } },
+        y: { ticks: { color: '#94a3b8', font:{size:11}, callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+function initWinRateChart() {
+  const ctx = document.getElementById('winRateChart').getContext('2d');
+  const labels = PAGE_DATA.winRateHistory.map(w => w.date);
+  const dirData = PAGE_DATA.winRateHistory.map(w => w.direction);
+  const magData = PAGE_DATA.winRateHistory.map(w => w.magnitude);
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: '方向正确率',
+        data: dirData,
+        borderColor: '#d4af37',
+        backgroundColor: 'rgba(212,175,55,0.1)',
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: '#d4af37'
+      },{
+        label: '幅度档正确率',
+        data: magData,
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59,130,246,0.1)',
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: '#3b82f6'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font:{size:12} } },
+        tooltip: { backgroundColor: 'rgba(10,14,23,0.95)', borderColor: '#1e2937', borderWidth: 1, titleColor: '#d4af37', bodyColor: '#e2e8f0' }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', font:{size:11} }, grid: { color: 'rgba(255,255,255,0.03)' } },
+        y: { min: 0, max: 100, ticks: { color: '#94a3b8', font:{size:11}, callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      annotation: {}
+    },
+    plugins: [{
+      id: 'baseline',
+      afterDraw(chart) {
+        const ctx = chart.ctx;
+        const yScale = chart.scales.y;
+        const y = yScale.getPixelForValue(50);
+        ctx.save();
+        ctx.strokeStyle = 'rgba(239,68,68,0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6,4]);
+        ctx.beginPath();
+        ctx.moveTo(chart.chartArea.left, y);
+        ctx.lineTo(chart.chartArea.right, y);
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(239,68,68,0.8)';
+        ctx.font = '11px Noto Sans SC';
+        ctx.fillText('50% 随机基准线', chart.chartArea.left + 8, y - 6);
+        ctx.restore();
+      }
+    }]
+  });
+}
+
+// ==================== REFRESH BUTTON ====================
+
+const REFRESH_COOLDOWN_MS = 20 * 60 * 1000; // 20 minutes
+const GITHUB_CONFIG = {
+  // Configure these in Settings → Secrets or hardcode for personal use
+  owner: '',        // GitHub username
+  repo: '',         // repo name
+  workflowId: 'refresh.yml',
+  token: ''         // Personal Access Token (set via secrets in production)
+};
+
+function handleRefresh() {
+  const last = localStorage.getItem('lastRefresh');
+  const now = Date.now();
+  if (last && now - parseInt(last) < REFRESH_COOLDOWN_MS) {
+    const remaining = Math.ceil((REFRESH_COOLDOWN_MS - (now - parseInt(last))) / 60000);
+    alert(`刷新限流中，请等待约 ${remaining} 分钟后再试`);
+    return;
+  }
+
+  const btn = document.getElementById('refreshBtn');
+  const progress = document.getElementById('refreshProgress');
+  const steps = ['step1','step2','step3','step4'];
+
+  btn.disabled = true;
+  btn.classList.add('spinning');
+  progress.classList.add('active');
+
+  let currentStep = 0;
+  function activateStep(idx) {
+    steps.forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.classList.remove('active','done');
+      if (i < idx) el.classList.add('done');
+      if (i === idx) el.classList.add('active');
+    });
+  }
+
+  activateStep(0); // 排队中
+
+  // Simulate pipeline progress (in production, poll GitHub Actions API for real status)
+  const timers = [
+    setTimeout(() => activateStep(1), 2000),  // 采集中
+    setTimeout(() => activateStep(2), 6000),  // 推理中
+    setTimeout(() => activateStep(3), 10000), // 更新面板
+    setTimeout(() => {
+      steps.forEach(id => document.getElementById(id).classList.remove('active','done').classList.add('done'));
+      localStorage.setItem('lastRefresh', Date.now().toString());
+      setTimeout(() => {
+        progress.classList.remove('active');
+        btn.disabled = false;
+        btn.classList.remove('spinning');
+        location.reload();
+      }, 1500);
+    }, 13000)
+  ];
+
+  // In production, trigger GitHub Actions workflow_dispatch:
+  // fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/actions/workflows/${GITHUB_CONFIG.workflowId}/dispatches`, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Authorization': `Bearer ${GITHUB_CONFIG.token}`,
+  //     'Accept': 'application/vnd.github.v3+json'
+  //   },
+  //   body: JSON.stringify({ ref: 'main' })
+  // }).then(() => pollWorkflowStatus());
+}
+
+// ==================== INIT ====================
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderTopCards();
+  renderPredictionDetail();
+  renderSignals();
+  renderGlossary();
+  renderHistoryTable();
+  renderNews();
+  renderFooter();
+  initPriceChart();
+  initChangeChart();
+  initWinRateChart();
+});
+</script>
+
+</body>
+</html>

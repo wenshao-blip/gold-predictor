@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黄金预测系统 · 超详细部署指南</title>
+<style>
+:root {
+  --bg: #0d1117; --card: #161b22; --border: #30363d;
+  --gold: #d4af37; --gold-light: #f0c75e;
+  --red: #ef4444; --green: #22c55e; --blue: #3b82f6;
+  --text: #e2e8f0; --dim: #94a3b8; --muted: #64748b;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.8; padding: 24px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+h1 { color: var(--gold); font-size: 28px; margin-bottom: 8px; }
+.subtitle { color: var(--dim); font-size: 15px; margin-bottom: 32px; }
+h2 { color: var(--gold-light); font-size: 22px; margin: 40px 0 16px; border-left: 4px solid var(--gold); padding-left: 12px; }
+h3 { color: var(--text); font-size: 18px; margin: 28px 0 12px; }
+p { margin-bottom: 12px; }
+code {
+  background: #1a2332; color: var(--gold-light); padding: 2px 8px;
+  border-radius: 4px; font-size: 14px; font-family: 'Consolas', monospace;
+}
+.code-block {
+  background: #0a0e17; border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; margin: 12px 0; overflow-x: auto;
+}
+.code-block code {
+  background: none; color: #a5d6ff; padding: 0; font-size: 14px;
+  display: block; white-space: pre;
+}
+.step {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; margin: 16px 0; position: relative;
+}
+.step-num {
+  position: absolute; top: -12px; left: 20px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #0a0e17; font-weight: 900; font-size: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; margin-left: 44px; }
+.step-body { margin-left: 0; }
+.alert {
+  border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 14px;
+}
+.alert.tip { background: rgba(34,197,94,0.1); border-left: 3px solid var(--green); }
+.alert.warn { background: rgba(239,68,68,0.1); border-left: 3px solid var(--red); }
+.alert.info { background: rgba(59,130,246,0.1); border-left: 3px solid var(--blue); }
+.alert strong { color: var(--gold-light); }
+ul, ol { margin: 8px 0 8px 24px; }
+li { margin: 6px 0; }
+.keyword { color: var(--gold); font-weight: 600; }
+.phase-tag {
+  display: inline-block; background: rgba(212,175,55,0.15);
+  color: var(--gold); padding: 4px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 600; margin-bottom: 4px;
+}
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.checklist { list-style: none; margin-left: 0; }
+.checklist li { padding-left: 28px; position: relative; }
+.checklist li:before { content: "☐"; position: absolute; left: 0; color: var(--gold); font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>黄金预测系统 · 超详细部署指南</h1>
+<p class="subtitle">面向零基础用户 | 跟着做就行 | 约 30 分钟完成</p>
+
+<div class="alert info">
+  <strong>先读这里：</strong>这个指南分为 6 个阶段，每个阶段有若干步骤。你只需要按顺序操作，遇到不确定的地方先跳过，最后统一检查。每一步都标了预计耗时。
+</div>
+
+<!-- ========== Phase 1 ========== -->
+<span class="phase-tag">阶段一</span>
+<h2>注册 GitHub 账号 &amp; 创建仓库</h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-title">注册 GitHub 账号（约 3 分钟）</div>
+  <div class="step-body">
+    <p>如果你已经有 GitHub 账号，跳到第 2 步。</p>
+    <ol>
+      <li>打开 <code>https://github.com</code></li>
+      <li>点右上角 <strong>Sign up</strong></li>
+      <li>输入邮箱、设置密码、用户名（如 <code>yourname</code>）</li>
+      <li>完成验证码，去邮箱点确认链接</li>
+    </ol>
+    <div class="alert tip"><strong>提示：</strong>用户名会成为你面板网址的一部分（如 <code>yourname.github.io</code>），建议用简单好记的。</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-title">创建新仓库（约 2 分钟）</div>
+  <div class="step-body">
+    <ol>
+      <li>登录后，点右上角 <strong>+</strong> 号 → <strong>New repository</strong></li>
+      <li><strong>Repository name</strong> 填：<code>gold-predictor</code></li>
+      <li><strong>Description</strong> 填：<code>黄金每日趋势预测系统</code>（可空）</li>
+      <li>可见性选 <strong>Public</strong>（公开——否则 GitHub Pages 免费版用不了）</li>
+      <li>勾选 <strong>Add a README file</strong></li>
+      <li>其他都默认，点 <strong>Create repository</strong></li>
+    </ol>
+    <div class="alert tip"><strong>必须选 Public：</strong>GitHub Pages 的免费版只支持公开仓库。如果你想用私有仓库，需要 GitHub Pro 付费版。</div>
+  </div>
+</div>
+
+<!-- ========== Phase 2 ========== -->
+<span class="phase-tag">阶段二</span>
+<h2>上传项目文件到 GitHub</h2>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-title">安装 GitHub Desktop（约 5 分钟）</div>
+  <div class="step-body">
+    <p>你不需要学命令行，用图形界面工具最简单。</p>
+    <ol>
+      <li>打开 <code>https://desktop.github.com</code></li>
+      <li>下载 <strong>GitHub Desktop</strong>（Windows/Mac 都有）</li>
+      <li>安装后打开，用你的 GitHub 账号登录</li>
+      <li>它会自动找到你刚创建的 <code>gold-predictor</code> 仓库</li>
+    </ol>
+    <div class="alert tip"><strong>提示：</strong>GitHub Desktop 的界面是中文的（系统语言），操作和普通软件一样简单。</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-title">把项目文件夹克隆到本地（约 2 分钟）</div>
+  <div class="step-body">
+    <ol>
+      <li>在 GitHub Desktop 左上角点 <strong>File → Clone repository</strong></li>
+      <li>选择 <code>gold-predictor</code></li>
+      <li><strong>Local path</strong> 选一个好找的目录，比如 <code>D:\gold-predictor</code></li>
+      <li>点 <strong>Clone</strong></li>
+    </ol>
+    <p>现在本地 <code>D:\gold-predictor</code> 只有一个 README.md 文件。</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">5</div>
+  <div class="step-title">把系统文件复制进去（约 3 分钟）</div>
+  <div class="step-body">
+    <p>我在你的电脑上已经创建好了所有文件，路径是：</p>
+    <div class="code-block"><code>C:\Users\15693\AppData\Roaming\TRAE SOLO CN\...\gold-predictor\</code></div>
+    <p>操作：</p>
+    <ol>
+      <li>打开上面的文件夹</li>
+      <li>选中<strong>所有文件和文件夹</strong>（除了 README.md，因为 GitHub 已经有一个了）</li>
+      <li>复制（Ctrl+C）</li>
+      <li>打开本地克隆目录 <code>D:\gold-predictor</code></li>
+      <li>把原来的 README.md 删掉（用我们的新 README.md 替换）</li>
+      <li>粘贴（Ctrl+V）</li>
+    </ol>
+    <p>复制后你的目录结构应该是这样：</p>
+    <div class="code-block"><code>gold-predictor/
+├── .github/workflows/     ← 3 个 yml 文件
+├── dashboard/
+│   └── dashboard.html     ← 预测面板
+├── data/
+│   └── .gitkeep
+├── scripts/               ← 7 个 Python 脚本
+├── .gitignore
+├── API_KEYS_GUIDE.md
+├── README.md              ← 预测规则手册
+├── log.xlsx               ← 评分日志
+└── requirements.txt</code></div>
+    <div class="alert warn"><strong>注意：</strong>确保 <code>.github</code> 文件夹也复制了（它是隐藏文件夹，可能需要先在文件管理器里开启"查看隐藏文件"）。</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">6</div>
+  <div class="step-title">提交并推送到 GitHub（约 2 分钟）</div>
+  <div class="step-body">
+    <ol>
+      <li>回到 GitHub Desktop，你会看到一堆<strong>变更文件</strong>（绿色 + 号）</li>
+      <li>左下角 <strong>Summary</strong> 填：<code>初始化黄金预测系统</code></li>
+      <li>点 <strong>Commit to main</strong> 按钮</li>
+      <li>然后点顶部的 <strong>Push origin</strong> 按钮</li>
+      <li>等进度条走完，所有文件就上传到 GitHub 了</li>
+    </ol>
+    <div class="alert tip"><strong>成功标志：</strong>打开 <code>https://github.com/你的用户名/gold-predictor</code>，能看到所有文件夹和文件。</div>
+  </div>
+</div>
+
+<!-- ========== Phase 3 ========== -->
+<span class="phase-tag">阶段三</span>
+<h2>获取 API Key（约 10 分钟）</h2>
+
+<div class="step">
+  <div class="step-num">7</div>
+  <div class="step-title">获取 Tavily API Key（新闻搜索）</div>
+  <div class="step-body">
+    <ol>
+      <li>打开 <code>https://tavily.com</code></li>
+      <li>点 <strong>Sign Up</strong>，用 Google 或邮箱注册</li>
+      <li>登录后进入 Dashboard 页面</li>
+      <li>你会看到一个 <strong>API Key</strong>（格式：<code>tvly-xxxxxxxxx</code>）</li>
+      <li>复制它，先存到记事本里</li>
+    </ol>
+    <div class="alert tip"><strong>免费额度：</strong>1000 次/月，本系统每天用 5 次，月用约 150 次，免费够用。</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">8</div>
+  <div class="step-title">获取 DeepSeek API Key（模型推理）</div>
+  <div class="step-body">
+    <ol>
+      <li>打开 <code>https://platform.deepseek.com</code></li>
+      <li>注册账号（可用手机号或邮箱）</li>
+      <li>左侧菜单点 <strong>API Keys</strong></li>
+      <li>点 <strong>创建 API Key</strong></li>
+      <li>名字随便填（如 <code>gold-predictor</code>），创建</li>
+      <li>复制弹出的 Key（格式：<code>sk-xxxxxxxxx</code>），存到记事本</li>
+      <li><strong>充值：</strong>左侧菜单点 <strong>充值</strong>，微信扫码充 ¥1 即可</li>
+    </ol>
+    <div class="alert tip"><strong>¥1 够用多久？</strong>每次推理约 ¥0.01，每天 1 次。¥1 ≈ 100 次 ≈ 3 个月。</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">9</div>
+  <div class="step-title">记录 LLM 配置信息</div>
+  <div class="step-body">
+    <p>记下这 3 个值（等下要填到 GitHub Secrets 里）：</p>
+    <div class="code-block"><code>LLM_API_KEY    = sk-xxxxxxxxx          （你刚复制的 DeepSeek Key）
+LLM_BASE_URL   = https://api.deepseek.com/v1
+LLM_MODEL      = deepseek-chat</code></div>
+  </div>
+</div>
+
+<!-- ========== Phase 4 ========== -->
+<span class="phase-tag">阶段四</span>
+<h2>在 GitHub 配置 Secrets（约 5 分钟）</h2>
+
+<div class="step">
+  <div class="step-num">10</div>
+  <div class="step-title">进入仓库设置页面</div>
+  <div class="step-body">
+    <ol>
+      <li>打开你的仓库页面：<code>https://github.com/你的用户名/gold-predictor</code></li>
+      <li>点顶部标签栏的 <strong>Settings</strong>（设置）</li>
+      <li>左侧菜单找到 <strong>Secrets and variables</strong> → 点 <strong>Actions</strong></li>
+    </ol>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">11</div>
+  <div class="step-title">添加 4 个 Secrets</div>
+  <div class="step-body">
+    <p>点绿色按钮 <strong>New repository secret</strong>，逐个添加以下 4 个：</p>
+    <table style="width:100%; border-collapse:collapse; margin:12px 0;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px;"><strong>Name</strong></td>
+        <td style="padding:8px;"><strong>Secret</strong></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px;"><code>TAVILY_API_KEY</code></td>
+        <td style="padding:8px;">tvly-xxxxxxxxx（第 7 步获取）</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px;"><code>LLM_API_KEY</code></td>
+        <td style="padding:8px;">sk-xxxxxxxxx（第 8 步获取）</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px;"><code>LLM_BASE_URL</code></td>
+        <td style="padding:8px;"><code>https://api.deepseek.com/v1</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px;"><code>LLM_MODEL</code></td>
+        <td style="padding:8px;"><code>deepseek-chat</code></td>
+      </tr>
+    </table>
+    <div class="alert tip"><strong>每个 Secret 的添加方法：</strong>Name 填名称（如 TAVILY_API_KEY）→ Secret 填值 → 点 Add secret。</div>
+    <div class="alert warn"><strong>注意：</strong>Name 必须和上表完全一致（包括大小写），否则 GitHub Actions 找不到。</div>
+  </div>
+</div>
+
+<!-- ========== Phase 5 ========== -->
+<span class="phase-tag">阶段五</span>
+<h2>启用 GitHub Pages（约 3 分钟）</h2>
+
+<div class="step">
+  <div class="step-num">12</div>
+  <div class="step-title">配置 Pages 部署源</div>
+  <div class="step-body">
+    <ol>
+      <li>在仓库的 <strong>Settings</strong> 页面</li>
+      <li>左侧菜单找到 <strong>Pages</strong>（在 Code and automation 分类下）</li>
+      <li><strong>Source</strong> 选择 <strong>Deploy from a branch</strong></li>
+      <li><strong>Branch</strong> 选 <code>main</code>，旁边选 <code>/dashboard</code></li>
+      <li>点 <strong>Save</strong></li>
+    </ol>
+    <div class="alert tip"><strong>面板地址：</strong>保存后页面顶部会显示你的面板网址，格式为：<br><code>https://你的用户名.github.io/gold-predictor/</code><br>先记下来。</div>
+    <div class="alert warn"><strong>如果选不到 /dashboard：</strong>先选 <code>main</code> 和 <code>/root</code>，保存后等 1-2 分钟再回来改成 <code>/dashboard</code>。GitHub 有时需要先识别到分支才有下拉选项。</div>
+  </div>
+</div>
+
+<!-- ========== Phase 6 ========== -->
+<span class="phase-tag">阶段六</span>
+<h2>手动测试流水线（约 5 分钟）</h2>
+
+<div class="step">
+  <div class="step-num">13</div>
+  <div class="step-title">触发晨间流水线</div>
+  <div class="step-body">
+    <ol>
+      <li>在仓库页面点顶部 <strong>Actions</strong> 标签</li>
+      <li>左侧会看到 3 个 workflow：<strong>晨间流水线</strong>、<strong>午后复核</strong>、<strong>手动刷新</strong></li>
+      <li>点 <strong>晨间流水线</strong></li>
+      <li>右侧点绿色按钮 <strong>Run workflow</strong> → 再点 <strong>Run workflow</strong></li>
+      <li>等 10-20 秒，刷新页面，会看到运行中的任务（黄色圈圈）</li>
+    </ol>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">14</div>
+  <div class="step-title">查看运行结果</div>
+  <div class="step-body">
+    <ol>
+      <li>点那个运行中的任务（标题是自动提交时间）</li>
+      <li>会看到 4 个步骤：<code>1/4 结算昨日预测</code> → <code>2/4 采集今日数据</code> → <code>3/4 模型推理</code> → <code>4/4 部署面板</code></li>
+      <li>等绿色 ✓ 全部亮起（约 2-3 分钟），表示成功</li>
+      <li>如果有红色 ✗，点进去看日志，通常是 API Key 填错或额度不足</li>
+    </ol>
+    <div class="alert tip"><strong>成功标志：</strong>仓库里 <code>log.xlsx</code> 和 <code>dashboard/dashboard.html</code> 有新的提交记录（提交者 github-actions[bot]）。</div>
+    <div class="alert warn"><strong>常见报错排查：</strong><br>
+    • <code>TAVILY_API_KEY not set</code> → Tavily Key 没填或拼错<br>
+    • <code>LLM_API_KEY not set</code> → DeepSeek Key 没填<br>
+    • <code>401 Unauthorized</code> → Key 无效或已过期<br>
+    • <code>Insufficient balance</code> → DeepSeek 余额不足，充 ¥1<br>
+    • 金价/VIX 获取失败 → 网络波动，重跑一次</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">15</div>
+  <div class="step-title">访问你的预测面板</div>
+  <div class="step-body">
+    <p>打开浏览器，访问：</p>
+    <div class="code-block"><code>https://你的用户名.github.io/gold-predictor/</code></div>
+    <p>你会看到黄金预测面板，包含当日预测、实时金价、60日走势图、历史记录、要闻等全部板块。</p>
+    <div class="alert tip"><strong>手机也能看：</strong>这个面板是响应式设计，手机浏览器打开同样美观。</div>
+    <div class="alert info"><strong>首次部署可能需要等 1-2 分钟：</strong>GitHub Pages 第一次构建需要时间。如果打开是 404，等 2 分钟再刷新。</div>
+  </div>
+</div>
+
+<hr>
+
+<h2>日常使用说明</h2>
+
+<h3>自动运行</h3>
+<ul>
+  <li><strong>每天 06:30（北京时间）</strong>：自动跑晨间流水线——采集数据→AI推理→生成预测→更新面板</li>
+  <li><strong>每天 15:35（北京时间）</strong>：自动跑午后复核——只更新实时金价，不推翻早上的预测</li>
+  <li><strong>次日 06:30</strong>：自动结算昨天的预测——回填实际价→打分→更新胜率</li>
+  <li>你什么都不用做，每天打开面板看结果就行</li>
+</ul>
+
+<h3>手动刷新（盘中想看最新行情）</h3>
+<ol>
+  <li>打开面板网页</li>
+  <li>点右上角 <strong>⟳ 立即刷新</strong> 按钮</li>
+  <li>页面顶部显示进度条：排队中 → 采集中 → 推理中 → 更新面板</li>
+  <li>约 1-3 分钟后面板自动刷新，显示最新金价</li>
+  <li>20 分钟内不可重复点击（限流防滥用）</li>
+</ol>
+
+<h3>查看历史记录</h3>
+<ul>
+  <li>面板"历史预测记录"表格会自动更新</li>
+  <li><code>log.xlsx</code> 文件也同步更新（在 GitHub 仓库里直接查看）</li>
+  <li>攒够 20 个已结算样本后，系统自动出置信度校准报告</li>
+</ul>
+
+<hr>
+
+<h2>完成检查清单</h2>
+<ul class="checklist">
+  <li>GitHub 账号已注册</li>
+  <li>仓库 gold-predictor 已创建（Public 可见性）</li>
+  <li>所有文件已上传到仓库</li>
+  <li>Tavily API Key 已获取并存入 Secrets</li>
+  <li>DeepSeek API Key 已获取并存入 Secrets（LLM_API_KEY、LLM_BASE_URL、LLM_MODEL）</li>
+  <li>DeepSeek 已充值 ¥1</li>
+  <li>GitHub Pages 已启用（Source: main / /dashboard）</li>
+  <li>晨间流水线手动触发成功（4 步全绿 ✓）</li>
+  <li>面板网页能正常打开</li>
+</ul>
+
+<div class="alert info" style="margin-top:32px;">
+  <strong>如果遇到任何问题：</strong>把 GitHub Actions 的报错日志截图发给我，我帮你排查。最常见的 3 个问题：API Key 拼写错误、DeepSeek 没充值、GitHub Pages 还没生效（等 2 分钟）。
+</div>
+
+</div>
+</body>
+</html>
