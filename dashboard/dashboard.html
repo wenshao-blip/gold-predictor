@@ -396,7 +396,7 @@ td.center { text-align: center; }
 
 const PAGE_DATA = {
   "meta": {
-    "generatedAt": "2026-08-27 20:45",
+    "generatedAt": "2026-08-27 23:15",
     "pipelineVersion": "1.0",
     "nextUpdate": "2026-08-27 15:35"
   },
@@ -414,29 +414,29 @@ const PAGE_DATA = {
     "marketCondition": "趋势涨"
   },
   "realtime": {
-    "usdPerOz": 4588.600098,
-    "cnyPerGram": 994.01,
-    "lastUpdate": "2026-08-27 20:45",
+    "usdPerOz": 4593.200195,
+    "cnyPerGram": 995.0,
+    "lastUpdate": "2026-08-27 23:15",
     "source": "gold-api.com"
   },
   "marketLabel": {
     "tag": "趋势涨",
     "detail": "趋势涨",
-    "trend20d": 7.1660787161928425
+    "trend20d": 7.133799082336111
   },
   "record": {
-    "settled": 0,
+    "settled": 2,
     "total": 3,
-    "directionCorrect": 0,
-    "magnitudeCorrect": 0,
-    "directionRate": 0,
-    "magnitudeRate": 0,
-    "directionRate30": 0,
-    "magnitudeRate30": 0,
-    "trendWinRate": null,
+    "directionCorrect": 1,
+    "magnitudeCorrect": 2,
+    "directionRate": 50.0,
+    "magnitudeRate": 100.0,
+    "directionRate30": 50.0,
+    "magnitudeRate30": 100.0,
+    "trendWinRate": 50.0,
     "rangeWinRate": null,
     "confidenceRecorded": 3,
-    "confidenceSettled": 0,
+    "confidenceSettled": 2,
     "calibrationThreshold": 20
   },
   "priceHistory": [
@@ -727,11 +727,24 @@ const PAGE_DATA = {
     },
     {
       "date": "2026-08-27",
-      "usd": 4647.9,
-      "chg": 1.08
+      "usd": 4646.5,
+      "chg": 1.05
     }
   ],
-  "winRateHistory": [],
+  "winRateHistory": [
+    {
+      "date": "2026-08-21",
+      "direction": 100.0,
+      "magnitude": 100.0,
+      "settled": 1
+    },
+    {
+      "date": "2026-08-24",
+      "direction": 50.0,
+      "magnitude": 100.0,
+      "settled": 2
+    }
+  ],
   "bullSignals": [
     {
       "title": "昨日反弹动能",
@@ -782,9 +795,9 @@ const PAGE_DATA = {
       "mag": "中",
       "basePrice": 4595.600098,
       "actualPrice": null,
-      "actualChange": "=IF(OR(I4=\"\",C4=\"\"),\"\",(I4-C4)/C4)",
-      "dirCorrect": "=IF(OR(D4=\"\",K4=\"\"),\"\",IF(D4=K4,\"√\",\"×\"))",
-      "magCorrect": "=IF(OR(E4=\"\",L4=\"\"),\"\",IF(E4=L4,\"√\",\"×\"))",
+      "actualChange": "",
+      "dirCorrect": "",
+      "magCorrect": "",
       "market": "趋势涨",
       "drivers": "利空因素：超买回调、VIX低位、前高阻力。利多因素：昨日反弹动能、地缘不确定性。但利空占优，预计今日下跌概率较大。",
       "note": "[2026-08-27 20:20 自动生成]",
@@ -796,30 +809,30 @@ const PAGE_DATA = {
       "dir": "涨",
       "mag": "大",
       "basePrice": 4643.9,
-      "actualPrice": null,
-      "actualChange": "=IF(OR(I3=\"\",C3=\"\"),\"\",(I3-C3)/C3)",
-      "dirCorrect": "=IF(OR(D3=\"\",K3=\"\"),\"\",IF(D3=K3,\"√\",\"×\"))",
-      "magCorrect": "=IF(OR(E3=\"\",L3=\"\"),\"\",IF(E3=L3,\"√\",\"×\"))",
+      "actualPrice": 4593.200195,
+      "actualChange": -1.0918,
+      "dirCorrect": "×",
+      "magCorrect": "√",
       "market": "趋势涨(20日+12.66%)",
       "drivers": "动能延续(上周+5.6%创三个月新高,今早跳空高开)+央行购金(PBOC 6月+15t连买21月)+霍尔木兹避险(航运-90%)+9月降息押注升温；风险:美元走强/连涨后获利回吐/VIX回落15.1",
-      "note": "周一06:30定时执行失败(UTC时钟周日误判)，10:15手动补跑；基准价为10:15实时价(晚于06:00切点)；口径已改为当日趋势",
+      "note": "周一06:30定时执行失败(UTC时钟周日误判)，10:15手动补跑；基准价为10:15实时价(晚于06:00切点)；口径已改为当日趋势；[2026-08-27 23:15 批量结算] 实际价=$4593.200195, 涨跌=-1.09%",
       "confidence": 55,
-      "settled": false
+      "settled": true
     },
     {
       "date": "2026-08-21",
       "dir": "涨",
       "mag": "大",
       "basePrice": 4538.3,
-      "actualPrice": 4604.09,
-      "actualChange": "=IF(OR(I2=\"\",C2=\"\"),\"\",(I2-C2)/C2)",
-      "dirCorrect": "=IF(OR(D2=\"\",K2=\"\"),\"\",IF(D2=K2,\"√\",\"×\"))",
-      "magCorrect": "=IF(OR(E2=\"\",L2=\"\"),\"\",IF(E2=L2,\"√\",\"×\"))",
+      "actualPrice": 4593.200195,
+      "actualChange": 1.2097,
+      "dirCorrect": "√",
+      "magCorrect": "√",
       "market": "趋势涨",
       "drivers": "动能突破(8/20 +4.29%, RSI58/MACD多头)+央行购金加速(PBOC 7月+19.9t)+CFTC净多+9%+霍尔木兹避险+通胀降温；风险：暴涨后回调、联储信号反复、VIX升至16",
-      "note": "周六06:30定时结算失败(UTC时区误判+会话无产出)，8/24手动补结算；实际价=周五纽约收盘(新闻源previous close 4604.09，与LBMA周五定盘4582.10及+1.69%单日涨幅互证)",
+      "note": "周六06:30定时结算失败(UTC时区误判+会话无产出)，8/24手动补结算；实际价=周五纽约收盘(新闻源previous close 4604.09，与LBMA周五定盘4582.10及+1.69%单日涨幅互证)；[2026-08-27 23:15 批量结算] 实际价=$4593.200195, 涨跌=+1.21%",
       "confidence": 60,
-      "settled": false
+      "settled": true
     }
   ],
   "news": []
