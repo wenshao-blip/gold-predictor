@@ -1,19 +1,19 @@
 {
-  "timestamp": "2026-08-27 23:15",
+  "timestamp": "2026-08-28 00:02",
   "gold_price": {
-    "usd_per_oz": 4593.200195,
-    "timestamp": "2026-08-27 23:15",
+    "usd_per_oz": 4612.0,
+    "timestamp": "2026-08-28 00:02",
     "source": "gold-api.com"
   },
   "vix": {
-    "value": 14.49,
-    "timestamp": "2026-08-27 23:15"
+    "value": 14.58,
+    "timestamp": "2026-08-28 00:02"
   },
   "fx": {
     "rate": 6.737816,
-    "timestamp": "2026-08-27 23:15"
+    "timestamp": "2026-08-28 00:02"
   },
-  "cny_per_gram": 995.0,
+  "cny_per_gram": 999.08,
   "news": [],
   "price_history": [
     {
@@ -303,8 +303,8 @@
     },
     {
       "date": "2026-08-27",
-      "usd": 4646.5,
-      "chg": 1.05
+      "usd": 4659.1,
+      "chg": 1.32
     }
   ]
 }
