@@ -19,7 +19,7 @@ log = get_logger("collect")
 
 # ==================== 金价 ====================
 
-GOLD_API_URL = "https://gold-api.com/api/XAU/USD"
+GOLD_API_URL = "https://api.gold-api.com/price/XAU"
 GOLD_API_HISTORY_URL = "https://api.gold-api.com/price/XAU/history"
 
 def fetch_gold_price() -> dict:
@@ -40,13 +40,15 @@ def fetch_gold_price() -> dict:
         }
     except Exception as e:
         log.error(f"获取金价失败: {e}")
-        # 备用源
+        # 备用源：同一 API 的备选端点
         try:
-            resp2 = requests.get("https://api.metalpriceapi.com/v1/latest?api_key=demo&base=USD&symbols=XAU", timeout=10)
-            if resp2.status_code == 200:
-                price = float(resp2.json().get("rates", {}).get("XAU", 0))
-                if price:
-                    return {"usd_per_oz": price, "timestamp": beijing_datetime_str(), "source": "metalpriceapi"}
+            resp2 = requests.get("https://api.gold-api.com/price/XAU/USD", timeout=10)
+            resp2.raise_for_status()
+            data2 = resp2.json()
+            price = float(data2.get("price", 0))
+            if price:
+                log.info(f"实时金价(备用源): ${price}/oz")
+                return {"usd_per_oz": price, "timestamp": beijing_datetime_str(), "source": "gold-api.com/alt"}
         except:
             pass
         return {"usd_per_oz": None, "timestamp": beijing_datetime_str(), "source": "error"}

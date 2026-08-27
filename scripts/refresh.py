@@ -75,4 +75,8 @@ def refresh_realtime():
 
 if __name__ == "__main__":
     success = refresh_realtime()
-    print("刷新成功" if success else "刷新失败")
+    if success:
+        print("刷新成功")
+    else:
+        print("刷新失败")
+        sys.exit(1)
