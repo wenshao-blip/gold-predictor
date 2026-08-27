@@ -41,26 +41,26 @@ def refresh_realtime():
 
     # 替换 usdPerOz
     html = re.sub(
-        r'(usdPerOz":\s*)[\d.]+',
+        r'(usdPerOz:\s*)[\d.]+',
         rf'\g<1>{usd_per_oz}',
         html
     )
     # 替换 cnyPerGram
     if cny_per_gram:
         html = re.sub(
-            r'(cnyPerGram":\s*)[\d.]+',
+            r'(cnyPerGram:\s*)[\d.]+',
             rf'\g<1>{cny_per_gram}',
             html
         )
     # 替换 lastUpdate
     html = re.sub(
-        r'(lastUpdate":\s*)"[^"]*"',
+        r'(lastUpdate:\s*)"[^"]*"',
         rf'\g<1>"{timestamp}"',
         html
     )
     # 替换 generatedAt
     html = re.sub(
-        r'(generatedAt":\s*)"[^"]*"',
+        r'(generatedAt:\s*)"[^"]*"',
         rf'\g<1>"{timestamp}"',
         html
     )
