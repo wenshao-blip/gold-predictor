@@ -125,10 +125,14 @@ def fetch_news(queries: list = None) -> list:
         try:
             resp = requests.post(
                 "https://api.tavily.com/search",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
                 json={
-                    "api_key": api_key,
                     "query": query,
-                    "search_depth": "advanced",
+                    "search_depth": "basic",
+                    "topic": "news",
                     "max_results": 5,
                     "include_raw_content": False,
                 },
@@ -191,15 +195,40 @@ def run_collection():
     """执行完整数据采集流程，结果保存到 data/ 目录。"""
     log.info("===== 开始数据采集 =====")
 
-    gold = fetch_gold_price()
-    vix = fetch_vix()
-    fx = fetch_usd_cny()
-    news = fetch_news()
-    history = fetch_price_history(60)
+    # 每个采集独立 try-except，确保部分失败不影响整体
+    try:
+        gold = fetch_gold_price()
+    except Exception as e:
+        log.error(f"金价采集异常: {e}")
+        gold = {"usd_per_oz": None, "timestamp": beijing_datetime_str(), "source": "error"}
+
+    try:
+        vix = fetch_vix()
+    except Exception as e:
+        log.error(f"VIX 采集异常: {e}")
+        vix = {"value": None, "timestamp": beijing_datetime_str()}
+
+    try:
+        fx = fetch_usd_cny()
+    except Exception as e:
+        log.error(f"汇率采集异常: {e}")
+        fx = {"rate": None, "timestamp": beijing_datetime_str()}
+
+    try:
+        news = fetch_news()
+    except Exception as e:
+        log.error(f"新闻采集异常: {e}")
+        news = []
+
+    try:
+        history = fetch_price_history(60)
+    except Exception as e:
+        log.error(f"价格历史采集异常: {e}")
+        history = []
 
     # 计算 ¥/g
     cny_per_gram = None
-    if gold["usd_per_oz"] and fx["rate"]:
+    if gold.get("usd_per_oz") and fx.get("rate"):
         cny_per_gram = round(gold["usd_per_oz"] * fx["rate"] / 31.1035, 2)
 
     collected = {
@@ -213,6 +242,7 @@ def run_collection():
     }
 
     save_data("collected.json", collected)
+    log.info(f"采集完成: 金价={gold.get('usd_per_oz')}, VIX={vix.get('value')}, 新闻={len(news)}条, 历史={len(history)}天")
     log.info("===== 数据采集完成 =====")
     return collected
 
