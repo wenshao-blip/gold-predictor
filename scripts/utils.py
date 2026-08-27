@@ -146,26 +146,34 @@ def get_all_records(ws) -> list:
         target_date = ws.cell(row=row, column=COL["target_date"]).value
         if not target_date:
             continue
+
+        def read_cell(col):
+            """读取单元格值，公式单元格返回空字符串。"""
+            val = ws.cell(row=row, column=col).value
+            if val is not None and isinstance(val, str) and val.startswith("="):
+                return ""  # 公式视为未填写
+            return val
+
         records.append({
             "row": row,
             "target_date": str(target_date),
-            "gen_time": str(ws.cell(row=row, column=COL["gen_time"]).value or ""),
-            "base_price": ws.cell(row=row, column=COL["base_price"]).value,
-            "final_dir": ws.cell(row=row, column=COL["final_dir"]).value or "",
-            "final_mag": ws.cell(row=row, column=COL["final_mag"]).value or "",
-            "model_dir": ws.cell(row=row, column=COL["model_dir"]).value or "",
-            "model_mag": ws.cell(row=row, column=COL["model_mag"]).value or "",
-            "human_adj": ws.cell(row=row, column=COL["human_adj"]).value or "",
-            "actual_price": ws.cell(row=row, column=COL["actual_price"]).value,
-            "actual_change": ws.cell(row=row, column=COL["actual_change"]).value,
-            "actual_dir": ws.cell(row=row, column=COL["actual_dir"]).value or "",
-            "actual_mag": ws.cell(row=row, column=COL["actual_mag"]).value or "",
-            "dir_correct": ws.cell(row=row, column=COL["dir_correct"]).value or "",
-            "mag_correct": ws.cell(row=row, column=COL["mag_correct"]).value or "",
-            "market": ws.cell(row=row, column=COL["market"]).value or "",
-            "drivers": ws.cell(row=row, column=COL["drivers"]).value or "",
-            "note": ws.cell(row=row, column=COL["note"]).value or "",
-            "confidence": ws.cell(row=row, column=COL["confidence"]).value,
+            "gen_time": str(read_cell(COL["gen_time"]) or ""),
+            "base_price": read_cell(COL["base_price"]),
+            "final_dir": read_cell(COL["final_dir"]) or "",
+            "final_mag": read_cell(COL["final_mag"]) or "",
+            "model_dir": read_cell(COL["model_dir"]) or "",
+            "model_mag": read_cell(COL["model_mag"]) or "",
+            "human_adj": read_cell(COL["human_adj"]) or "",
+            "actual_price": read_cell(COL["actual_price"]),
+            "actual_change": read_cell(COL["actual_change"]),
+            "actual_dir": read_cell(COL["actual_dir"]) or "",
+            "actual_mag": read_cell(COL["actual_mag"]) or "",
+            "dir_correct": read_cell(COL["dir_correct"]) or "",
+            "mag_correct": read_cell(COL["mag_correct"]) or "",
+            "market": read_cell(COL["market"]) or "",
+            "drivers": read_cell(COL["drivers"]) or "",
+            "note": read_cell(COL["note"]) or "",
+            "confidence": read_cell(COL["confidence"]),
         })
     return records
 
