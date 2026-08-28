@@ -1,50 +1,50 @@
 {
-  "timestamp": "2026-08-28 17:59",
+  "timestamp": "2026-08-29 05:51",
   "gold_price": {
-    "usd_per_oz": 4607.0,
-    "timestamp": "2026-08-28 17:59",
+    "usd_per_oz": 4456.399902,
+    "timestamp": "2026-08-29 05:51",
     "source": "gold-api.com"
   },
   "vix": {
-    "value": 14.5,
-    "timestamp": "2026-08-28 17:59"
+    "value": 14.43,
+    "timestamp": "2026-08-29 05:51"
   },
   "fx": {
     "rate": 6.737174,
-    "timestamp": "2026-08-28 17:59"
+    "timestamp": "2026-08-29 05:51"
   },
-  "cny_per_gram": 997.9,
+  "cny_per_gram": 965.28,
   "news": {
     "market": {
       "name": "市场行情",
       "items": [
         {
           "source": "unknown",
-          "title": "Gold Analysis: Prices Remain on Upward Trajectory - DailyForex",
-          "url": "https://www.dailyforex.com/forex-technical-analysis/2026/01/gold-analysis-19-january-2026/239976",
-          "snippet": "Works on providing technical analysis, market news, free signals and more with follow up for at least 12 hours a day, and aims to simplify forex trading and the concept of tra... ## Technical Analysis",
-          "published_date": "Mon, 19 Jan 2026 01:14:45 GMT"
+          "title": "Gold Price Forecast: XAU/USD hits lows sub-$4,600 as US inflation supports the Greenback",
+          "url": "https://www.tmgm.com/en/analysis/market-news/article/gold-price-forecast-xau-usd-hits-lows-sub-4-600-as-us-inflation-supports-the-greenback-202608270936",
+          "snippet": "TMGM Logo\n\nTMGMAnalysis\n\n# Gold Price Forecast: XAU/USD hits lows sub-$4,600 as US inflation supports the Greenback\n\nAuthor: Guillermo Alcala, FXStreet\n\nLast Updated: 27 Aug 2026\n\nMake us preferred on",
+          "published_date": "Thu, 27 Aug 2026 01:36:50 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 21, 2025): XAU/USD Near $4,350 as Fed “Pause” Talk Meets $5,000 Forecasts for 2026 - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-21-2025-xau-usd-near-4350-as-fed-pause-talk-meets-5000-forecasts-for-2026/",
-          "snippet": "# Gold Price Today (Dec. 21, 2025): XAU/USD Near $4,350 as Fed “Pause” Talk Meets $5,000 Forecasts for 2026. As of **Sunday, December 21, 2025**, live spot pricing put **gold around $4,352/oz**, keepi",
-          "published_date": "Sun, 21 Dec 2025 17:32:02 GMT"
+          "title": "Gold Price Forecast: XAU/USD holds above $4.600 with all ...",
+          "url": "https://www.fxstreet.com/news/gold-price-forecast-xau-usd-holds-above-4600-with-all-eyes-on-fed-warshs-speech-202608281142",
+          "snippet": "XAU/USD trades at $4,599 with the broader bullish stance in play as spot price holds well above the 200-day Simple Moving Average (SMA), now around $4,525. Momentum indicators in the daily chart endor",
+          "published_date": "Fri, 28 Aug 2026 11:42:18 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today, December 2, 2025: XAU/USD Holds Above $4,200 as Markets Bet on Fed Rate Cut - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-december-2-2025-xau-usd-holds-above-4200-as-markets-bet-on-fed-rate-cut/",
-          "snippet": "# Gold Price Today, December 2, 2025: XAU/USD Holds Above $4,200 as Markets Bet on Fed Rate Cut Spot gold is trading just above **$4,200 per ounce** on Tuesday, December 2, 2025, easing slightly after",
-          "published_date": "Tue, 02 Dec 2025 08:02:18 GMT"
+          "title": "Gold Price Forecast: XAU/USD Falls Below $4600 Ahead ...",
+          "url": "https://www.mitrade.com/au/insights/commodity/gold/gold-price-forecast-jackson-hole-xauusd",
+          "snippet": "## Gold Price Technical Analysis: Key XAU/USD Levels to Watch\n\nXAUUSD Daily chart\n\nXAUUSD Daily chart\n\nSource: tradingview\n\nThe latest decline has pushed XAU/USD below US$4,600 and increased the risk ",
+          "published_date": "Fri, 28 Aug 2026 10:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Forecast: XAU/USD remains moderately bid with $5,100 holding bulls - FXStreet",
-          "url": "https://www.fxstreet.com/news/gold-price-forecast-xau-usd-remains-moderately-bid-with-5-100-holding-bulls-202602121246",
-          "snippet": "# Gold Price Forecast: XAU/USD remains moderately bid with $5,100 holding bulls. Gold (XAU/USD) is trading practically flat at the top of the weekly range on Thursday, with bulls capped right below Fe",
-          "published_date": "Thu, 12 Feb 2026 12:46:38 GMT"
+          "title": "Gold Price Forecast: XAU/USD Bullish Momentum Persists ...",
+          "url": "https://cryptorank.io/news/feed/eb5a4-gold-price-forecast-xau-usd-bullish-run",
+          "snippet": "## FAQs\n\nQ1: Is gold a good investment in 2026?  \nGold remains a viable hedge against inflation and market volatility, especially with central banks diversifying reserves. However, it’s essential to c",
+          "published_date": "Mon, 24 Aug 2026 21:00:00 GMT"
         }
       ]
     },
@@ -53,31 +53,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "Gold falls as dollar holds firm on Fed rate-hike expectations - CNBC",
+          "title": "Fed July Meeting Preview: Rate Hike Still Possible As Markets Await Impact on US Stocks, Dollar, and Gold",
+          "url": "https://www.tradingkey.com/analysis/economic/central-banks/262056408-ahead-fed-july-interest-rate-meeting-rate-hike-possibility-remains-us-stocks-dollar-gold-react-tradingkey",
+          "snippet": "For gold, the U.S. dollar and real interest rates will be the primary variables determining its short-term direction. If the Fed keeps rates unchanged and Warsh strikes a relatively moderate tone, a p",
+          "published_date": "Wed, 29 Jul 2026 21:00:00 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Spot gold pulls back from two-week high on stronger dollar; Fed minutes on tap",
+          "url": "https://www.cnbc.com/2026/07/06/gold-holds-near-two-week-high-on-easing-fed-rate-hike-bets.html",
+          "snippet": "Data last week showed ​a marked slowdown in U.S. job growth in June alongside downward revisions to payrolls for the prior two months, leading markets to scale back expectations of a near-term Fed rat",
+          "published_date": "Mon, 06 Jul 2026 04:52:15 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Gold rises on weaker US dollar, soft inflation data",
+          "url": "https://www.reuters.com/world/india/gold-edges-higher-markets-weigh-warshs-inflation-message-after-fed-decision-2026-07-30",
+          "snippet": "Skip to main content\n\nReport AdImage 2\n\nExclusive news, data and analytics for financial market professionals Learn more about Refinitiv\n\n - Gold rose on Thursday as the U.S. dollar weakened and infla",
+          "published_date": "Thu, 30 Jul 2026 01:25:56 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Gold falls as hawkish Fed bets lift dollar to one-year peak",
           "url": "https://www.cnbc.com/2026/06/23/gold-falls-as-dollar-holds-firm-on-fed-rate-hike-expectations.html",
-          "snippet": "# Gold falls as dollar holds firm on Fed rate-hike expectations. Gold fell on Tuesday, pressured by firmer U.S. dollar on expectations of a Fed Reserve interest hike this year, while investors assesse",
+          "snippet": "@GC.1\n\nGold fell on Tuesday, pressured by firmer U.S. dollar on expectations of a Fed Reserve interest hike this year, while investors assessed U.S.-Iran peace talks.\n\nBloomberg | Bloomberg | Getty Im",
           "published_date": "Tue, 23 Jun 2026 06:03:07 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Gold price hits a new record high on a weaker dollar and expectations of a US interest rate cut - CNN",
-          "url": "https://www.cnn.com/2025/09/02/business/gold-price-record-dollar-interest-rates-intl",
-          "snippet": "# Gold price hits a new record high on a weaker dollar and expectations of a US interest rate cut Gold sailed past $3,500 per ounce to a record high Tuesday, as a weaker dollar and mounting expectatio",
-          "published_date": "Tue, 02 Sep 2025 08:25:00 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Spot gold falls nearly 1% to $4,123.49 amid strong US dollar, Fed pressure - Crypto Briefing",
-          "url": "https://cryptobriefing.com/spot-gold-falls-nearly-1-to-412349-amid-strong-us-dollar-fed-pressure/",
-          "snippet": "https://economymiddleeast.com/news/gold-prices-tumble-1-63-percent-to-two-week-low-of-4064-as-stronger-dollar-fed-rate-bets-pressure-bullion/. # Spot gold falls nearly 1% to $4,123.49 amid strong US d",
-          "published_date": "Tue, 07 Jul 2026 03:54:02 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Gold falls on stronger dollar, fading Fed rate-cut hopes - CNBC",
-          "url": "https://www.cnbc.com/2026/04/13/gold-falls-on-stronger-dollar-fading-fed-rate-cut-hopes.html",
-          "snippet": "# Gold falls on stronger dollar, fading Fed rate-cut hopes. Gold prices fell on Monday, while a rise in oil prices fueled inflation worries and dampened expectations for Federal Reserve interest rate ",
-          "published_date": "Mon, 13 Apr 2026 03:02:00 GMT"
         }
       ]
     },
@@ -86,31 +86,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "Record start to 2026 brings prospect of $5,000 gold into view - KITCO",
-          "url": "https://www.kitco.com/news/off-the-wire/2026-01-13/record-start-2026-brings-prospect-5000-gold-view",
-          "snippet": "Jan 12 (Reuters) - Gold and silver's upward run has reignited, with bullion topping $4,600 an ounce for the ​first time and big brokerages predicting $5,000 as a range of factors intensify, boosting t",
-          "published_date": "Tue, 13 Jan 2026 13:32:21 GMT"
+          "title": "menu",
+          "url": "https://intellectia.ai/blog/gold-price-forecast-2026-fed-policy",
+          "snippet": "### What are the key risks to gold prices in 2026?\n\nThe primary risks to gold prices include stronger-than-expected US economic growth that delays Fed rate cuts, a meaningful de-escalation of geopolit",
+          "published_date": "Wed, 29 Jul 2026 21:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold surges as U.S. capture of Venezuela president spurs safe-haven demand - CNBC",
-          "url": "https://www.cnbc.com/2026/01/05/gold-surges-as-us-capture-of-venezuela-president-spurs-safe-haven-demand.html",
-          "snippet": "# Gold surges as U.S. capture of Venezuela president spurs safe-haven demand. Gold prices climbed Monday, while other precious metals also surged after the United States captured Venezuelan President ",
-          "published_date": "Mon, 05 Jan 2026 05:02:19 GMT"
+          "title": "Gold at the crossroads: catalysts and outlook for the second half of 2026 | Kitco News",
+          "url": "https://www.kitco.com/opinion/2026-06-02/gold-crossroads-catalysts-and-outlook-second-half-2026",
+          "snippet": "A durable resolution of major geopolitical conflicts, while broadly positive for global risk assets, would reduce safe-haven demand and could prompt ETF outflows. Similarly, if artificial intelligence",
+          "published_date": "Tue, 02 Jun 2026 00:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Rate Today: Latest Gold Prices – March 24, 2026 - newspress.co.in",
-          "url": "https://newspress.co.in/gold-rate-today-latest-gold-prices-march-24-2026/",
-          "snippet": "# Gold Rate Today: Latest Gold Prices – March 24, 2026. Gold prices in India rallied sharply on **25 March 2026**, reversing recent declines as safe‑haven demand surged amid global economic uncertaint",
-          "published_date": "Wed, 25 Mar 2026 11:43:23 GMT"
+          "title": "Gold ETFs in 2026: How to Own the World's Oldest Safe ...",
+          "url": "https://www.etf.com/sections/news/gold-etfs-2026-how-own-worlds-oldest-safe-haven",
+          "snippet": "Layered on top of that are the unpredictable but potential chance of Fed rate cuts later this year, a weaker dollar compared to pre-2025 levels, persistent inflation concerns, questions about the Fed'",
+          "published_date": "Thu, 11 Jun 2026 17:12:32 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-24-2025-spot-gold-smashes-4500-to-a-fresh-record-as-safe-haven-demand-surges/",
-          "snippet": "# Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges. Meanwhile, broader market coverage from Reuters on Dec. 24 underscored that gold and silver ",
-          "published_date": "Wed, 24 Dec 2025 09:15:19 GMT"
+          "title": "Gold Pulls Back From $4,700 as Hormuz Hopes Cool Haven Demand | Forex News Gold | CryptoRank.io",
+          "url": "https://cryptorank.io/news/feed/3d2d3-gold-pulls-back-hormuz-haven-demand",
+          "snippet": "/\n\n/\n\n# Gold Pulls Back From $4,700 as Hormuz Hopes Cool Haven Demand\n\nForex NewsGoldCommoditiesHormuzGeopolitical RiskHaven Demand\n\nAug 25, 2026\n\n2min read\n\nbyJayshree\n\nforBitcoin World\n\nGold Pulls B",
+          "published_date": "Wed, 26 Aug 2026 21:00:00 GMT"
         }
       ]
     },
@@ -119,31 +119,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "Record 45% of central banks plan to increase gold holdings, WGC survey finds - Shanghai Metals Market",
-          "url": "https://news.metal.com/en/newscontent/103961020-Record-45-of-central-banks-plan-to-increase-gold-holdings-WGC-survey-finds",
-          "snippet": "# Record 45% of central banks plan to increase gold holdings, WGC survey finds. (Kitco News) - Central bank demand has been a solid pillar of support for the gold market as prices pushed to all-time h",
-          "published_date": "Thu, 18 Jun 2026 02:43:36 GMT"
+          "title": "298 Tonnes of ETF Gold Is Underwater. Central Banks Aren't.",
+          "url": "https://goldsilver.com/industry-news/goldsilver-news/gold-etf-outflows-central-bank-buying-divergence-2026",
+          "snippet": "### Who is buying on the other side?\n\nHere is where the two markets stop talking to each other. The World Gold Council’s 2026 Central Bank Gold Reserves Survey was published June 16. It found that 89%",
+          "published_date": "Thu, 25 Jun 2026 13:56:47 GMT"
         },
         {
           "source": "unknown",
-          "title": "China’s top ETF is now gold, not stocks - Mining.com",
-          "url": "https://www.mining.com/chinas-top-etf-is-now-gold-not-stocks/",
-          "snippet": "Micro Gold Futures $ 4713.1 / ozt  3.80%. # China’s top ETF is now gold, not stocks. China’s biggest ETF is now a gold fund. In the space of one week, three separate parts of the global financial syst",
-          "published_date": "Mon, 06 Jul 2026 19:10:41 GMT"
+          "title": "Bernstein lifts 2026 gold target to $4,533 on central bank buying, muted Fed hikes",
+          "url": "https://investinglive.com/commodities/seo-headline-bernstein-lifts-2026-gold-target-to-4-533-on-central-bank-buying-muted-fed-hikes",
+          "snippet": "Looking ahead, Bernstein pushed back on speculation that the Fed could raise rates later this year following its mid-June inflation forecast revisions. The bank's economists said they do not foresee a",
+          "published_date": "Thu, 16 Jul 2026 23:48:23 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Is Inching Closer To $5,000. Where Next For Investors? - Forbes",
-          "url": "https://www.forbes.com/sites/gauravsharma/2026/01/23/gold-is-inching-closer-to-5000-where-next-for-investors/",
-          "snippet": "## Going For Gold: Central Banks And Retail Investors. According to the World Gold Council, the central bank of Poland continues to lead the buying spree, having been last year’s largest official sect",
-          "published_date": "Fri, 23 Jan 2026 12:41:54 GMT"
+          "title": "Gold demand proves resilient despite Q2 selloff as central banks return and Asian buying remains strong - WGC | Kitco News",
+          "url": "https://www.kitco.com/news/article/2026-07-30/gold-demand-proves-resilient-despite-q2-selloff-central-banks-return-and",
+          "snippet": "The World Gold Council said the rebound reinforces the long-term structural case for central bank gold buying, even though total purchases for 2026 are expected to finish below last year's record pace",
+          "published_date": "Wed, 29 Jul 2026 21:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Russian central bank sold 700,000 oz. of gold in 2026 - bitget.com",
-          "url": "https://www.bitget.com/amp/news/detail/12560605375995",
-          "snippet": "Russian central bank sold 700,000 oz. # Russian central bank sold 700,000 oz. The Russian central bank has sold 700,000 troy ounces of gold so far this year, data showed on Monday. The central bank va",
-          "published_date": "Mon, 20 Apr 2026 17:12:39 GMT"
+          "title": "Central banks boost gold reserves with net 41 tonnes ...",
+          "url": "https://www.kitco.com/news/article/2026-07-03/central-banks-boost-gold-reserves-net-41-tonnes-purchased-may-world-gold",
+          "snippet": "Singapore, which purchased 4 tonnes for its first monthly net purchase since September 2025, raised its total gold holdings to 197 tonnes. “Separately, the MAS is looking to establish central bank gol",
+          "published_date": "Fri, 03 Jul 2026 00:00:00 GMT"
         }
       ]
     },
@@ -152,31 +152,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "China increases gold reserves by 9.95 tonnes in May for 19th straight month of purchases - KITCO",
+          "title": "How much gold will be enough to diversify China's reserves?",
+          "url": "https://www.reuters.com/world/china/how-much-gold-will-be-enough-diversify-chinas-reserves-2025-09-02",
+          "snippet": "If China targeted 5,000 tons in 2009, a higher number should probably be expected now as the country's economy has since expanded rapidly, BNP Paribas analyst David Wilson said.\n\n\"We will continue see",
+          "published_date": "Tue, 02 Sep 2025 13:58:59 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "China gold market update: Physical demand cools in May | Post by Ray Jia | Insights | World Gold Council",
+          "url": "https://www.gold.org/goldhub/gold-focus/2025/06/china-gold-market-update-physical-demand-cools-may",
+          "snippet": "The PBoC has now reported gold purchases for seven months in a row, adding 1.9t to its reserves in May (Chart 5). Currently, China’s official gold holdings have risen to 2,296t, 6.7% of its total fore",
+          "published_date": "Mon, 16 Jun 2025 00:00:00 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "China’s secret gold purchases boost price by 40% | Economy and Business | EL PAÍS English",
+          "url": "https://english.elpais.com/economy-and-business/2025-11-24/chinas-secret-gold-purchases-boost-price-by-40.html",
+          "snippet": "Official figures confirm that China has steadily increased its gold reserves since the outbreak of the war. The PBOC resumed gold purchases at the end of 2022 after three years of inactivity, adding 6",
+          "published_date": "Mon, 24 Nov 2025 13:22:04 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "China increases gold reserves by 9.95 tonnes in May for 19th straight month of purchases | Kitco News",
           "url": "https://www.kitco.com/news/article/2026-06-08/china-increases-gold-reserves-995-tonnes-may-19th-straight-month-purchases",
-          "snippet": "### gold. # China increases gold reserves by 9.95 tonnes in May for 19th straight month of purchases. Kitco NEWS has a diverse team of journalists reporting on the economy, stock markets, commodities,",
-          "published_date": "Mon, 08 Jun 2026 17:33:49 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "SocGen Suggests China’s 2025 Gold Purchases 10X of Official Figures, Gold Reserves Only Behind US - NAI500",
-          "url": "https://nai500.com/blog/2025/11/socgen-suggests-chinas-2025-gold-purchases-10x-of-official-figures-gold-reserves-only-behind-us/",
-          "snippet": "This week’s gold price movement will be influenced by multiple factors, with two key elements being market speculation regarding the actual scale of China’s gold reserves and upcoming US economic data",
-          "published_date": "Tue, 25 Nov 2025 06:40:41 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "China’s gold stockpile could surpass U.S. holdings in the next five years - BMO Capital Markets - KITCO",
-          "url": "https://www.kitco.com/news/article/2026-07-27/chinas-gold-stockpile-could-surpass-us-holdings-next-five-years-bmo-capital",
-          "snippet": "# China’s gold stockpile could surpass U.S. holdings in the next five years - BMO Capital Markets. Kitco NEWS has a diverse team of journalists reporting on the economy, stock markets, commodities, cr",
-          "published_date": "Mon, 27 Jul 2026 15:45:00 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "China’s PBOC Extends Gold-Buying Streak as Metal’s Rally Cools - Bloomberg.com",
-          "url": "https://www.bloomberg.com/news/articles/2025-12-07/china-s-pboc-extends-gold-buying-streak-as-metal-s-rally-cools",
-          "snippet": "# China’s PBOC Extends Gold-Buying Streak as Metal’s Rally Cools. China’s central bank added to its gold reserves for a 13th straight month, according to data released on Sunday. Bullion held by the P",
-          "published_date": "Sun, 07 Dec 2025 02:42:08 GMT"
+          "snippet": "(Kitco News) – The People’s Bank of China (PBoC) increased its gold reserves by nearly 10 tonnes last month, its 19th consecutive month of bullion purchases, according to the latest government data.  ",
+          "published_date": "Mon, 08 Jun 2026 00:00:00 GMT"
         }
       ]
     },
@@ -185,31 +185,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 24, 2025, 1:32 PM ET Update): Spot Gold Near $4,493 After Record $4,525 — Latest News, Forecasts and Analysis - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-24-2025-132-pm-et-update-spot-gold-near-4493-after-record-4525-latest-news-forecasts-and-analysis/",
-          "snippet": "# Gold Price Today (Dec. 24, 2025, 1:32 PM ET Update): Spot Gold Near $4,493 After Record $4,525 — Latest News, Forecasts and Analysis. **NEW YORK / LONDON — December 24, 2025** — The **gold price tod",
-          "published_date": "Wed, 24 Dec 2025 18:44:39 GMT"
+          "title": "gold price today: Why are gold and silver prices down now, and will gold hit $5,000 or drop to $4,500 and silver touch $90 or fall below $70? Precious metals price movement, analysts insights, market outlook and what should investors do now - The Economic Times",
+          "url": "https://m.economictimes.com/news/international/us/why-are-gold-and-silver-prices-down-now-and-will-gold-hit-5000-or-drop-to-4500-and-silver-touch-90-or-fall-below-70-precious-metals-price-movement-analysts-insights-market-outlook-and-what-should-investors-do-now/articleshow/130416988.cms",
+          "snippet": "Why are gold and silver prices down now, and will gold hit $5,000 or drop to $4,500 and silver touch $90 or fall below $70? Precious metals moved lower during the latest trading session as the dollar ",
+          "published_date": "Tue, 21 Apr 2026 00:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today on August 07, 2026 - usatoday.com",
-          "url": "https://www.usatoday.com/story/money/personalfinance/2026/08/07/gold-price-on-august-07-2026/91210890007/",
-          "snippet": "Gold Price Today on August 07, 2026. ## How much is gold per ounce today? As of Aug. 7, 2026, at 8:05 a.m. ET, the spot price of gold was **$4,323.50** per ounce, according to the latest market data. ",
-          "published_date": "Fri, 07 Aug 2026 12:20:16 GMT"
+          "title": "Gold price today, Friday, November 7: Gold moves above $4,000 after stock prices dip",
+          "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-price-today-friday-november-7-gold-moves-above-4000-after-stock-prices-dip-133421851.html",
+          "snippet": "4 min read\n\nGold (GC=F) futures opened at $3,986.90 per ounce on Friday, nearly the same as Thursday's close of $3,991. The price of gold rose above $4,000 in early trading. [...] 2. Personal Finance\n",
+          "published_date": "Fri, 07 Nov 2025 00:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-24-2025-spot-gold-smashes-4500-to-a-fresh-record-as-safe-haven-demand-surges/",
-          "snippet": "# Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges. Meanwhile, broader market coverage from Reuters on Dec. 24 underscored that gold and silver ",
-          "published_date": "Wed, 24 Dec 2025 09:15:19 GMT"
+          "title": "Stock Market Today: Live Updates 06.08.2026",
+          "url": "https://ts2.tech/en/stock-market-today-06-08-2026",
+          "snippet": "## Gold Advances After Rough Patch; Miners' Shares Seen as Inflation Shield\n\nAugust 6, 2026, 5:19 PM EDT.Gold prices push higher following recent difficulties, increasing speculation of potential new ",
+          "published_date": "Thu, 06 Aug 2026 08:00:02 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today: Gold Surges Past $5,300 Amid US-Iran Strikes; Domestic Prices Jump ₹3,160 to ₹1.64 Lakh/10g | Check City-Wise Rates - The Sunday Guardian",
-          "url": "https://sundayguardianlive.com/business/gold-price-today-28-feb-2026-gold-surges-past-5300-amid-us-iran-strikes-domestic-prices-jump-3160-to-164-lakh10g-check-city-wise-rates-173039/",
-          "snippet": "Copyright 2025 - All Right Reserved. Home > Business > Gold Price Today: Gold Surges Past $5,300 Amid US-Iran Strikes; Domestic Prices Jump ₹3,160 to ₹1.64 Lakh/10g | Check City-Wise Rates. **Gold Pri",
-          "published_date": "Sat, 28 Feb 2026 17:50:00 GMT"
+          "title": "Why Gold Is Going Up? XAU Price Today Climbs for 7th Straight Session as Trump Weakens the Dollar — TradingView News",
+          "url": "https://www.tradingview.com/news/financemagnates:772e41d72094b:0-why-gold-is-going-up-xau-price-today-climbs-for-7th-straight-session-as-trump-weakens-the-dollar",
+          "snippet": "Deutsche Bank went even further, stating Tuesday that gold could climb to $6,000 per ounce in 2026, citing persistent investment demand as central banks and investors increase allocations to non-dolla",
+          "published_date": "Wed, 28 Jan 2026 10:07:49 GMT"
         }
       ]
     }
@@ -502,8 +502,8 @@
     },
     {
       "date": "2026-08-28",
-      "usd": 4658.1,
-      "chg": 1.05
+      "usd": 4504.1,
+      "chg": -2.29
     }
   ]
 }
