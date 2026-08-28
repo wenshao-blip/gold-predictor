@@ -125,11 +125,9 @@ def fetch_news(queries: list = None) -> list:
         try:
             resp = requests.post(
                 "https://api.tavily.com/search",
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
+                headers={"Content-Type": "application/json"},
                 json={
+                    "api_key": api_key,
                     "query": query,
                     "search_depth": "basic",
                     "topic": "news",
@@ -138,7 +136,9 @@ def fetch_news(queries: list = None) -> list:
                 },
                 timeout=30
             )
-            resp.raise_for_status()
+            if resp.status_code != 200:
+                log.error(f"新闻搜索失败 '{query}': HTTP {resp.status_code} - {resp.text[:200]}")
+                continue
             data = resp.json()
             for item in data.get("results", []):
                 all_news.append({
