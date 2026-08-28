@@ -164,9 +164,9 @@ def build_page_data() -> dict:
 def replace_page_data(html: str, new_data: dict) -> str:
     """替换 dashboard.html 中的 PAGE_DATA JSON 块。"""
     new_json = json.dumps(new_data, ensure_ascii=False, indent=2)
-    pattern = r'const PAGE_DATA = \{.*?\};'
     replacement = f'const PAGE_DATA = {new_json};'
-    result = re.sub(pattern, replacement, html, flags=re.DOTALL)
+    # Use lambda to avoid re.sub() processing \n escape sequences in the replacement
+    result = re.sub(r'const PAGE_DATA = \{.*?\};', lambda m: replacement, html, flags=re.DOTALL)
     if result == html:
         log.warning("PAGE_DATA 未被替换（正则未匹配），检查 HTML 模板")
     return result

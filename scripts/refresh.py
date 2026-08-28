@@ -39,29 +39,29 @@ def refresh_realtime():
     # 使用正则替换 PAGE_DATA 中的 realtime 和 meta.generatedAt 字段
     timestamp = beijing_datetime_str()
 
-    # 替换 usdPerOz
+    # 替换 usdPerOz (JSON format: "usdPerOz": value)
     html = re.sub(
-        r'(usdPerOz:\s*)[\d.]+',
-        rf'\g<1>{usd_per_oz}',
+        r'("usdPerOz":\s*)[\d.]+',
+        lambda m: f'{m.group(1)}{usd_per_oz}',
         html
     )
     # 替换 cnyPerGram
     if cny_per_gram:
         html = re.sub(
-            r'(cnyPerGram:\s*)[\d.]+',
-            rf'\g<1>{cny_per_gram}',
+            r'("cnyPerGram":\s*)[\d.]+',
+            lambda m: f'{m.group(1)}{cny_per_gram}',
             html
         )
     # 替换 lastUpdate
     html = re.sub(
-        r'(lastUpdate:\s*)"[^"]*"',
-        rf'\g<1>"{timestamp}"',
+        r'("lastUpdate":\s*)"[^"]*"',
+        lambda m: f'{m.group(1)}"{timestamp}"',
         html
     )
     # 替换 generatedAt
     html = re.sub(
-        r'(generatedAt:\s*)"[^"]*"',
-        rf'\g<1>"{timestamp}"',
+        r'("generatedAt":\s*)"[^"]*"',
+        lambda m: f'{m.group(1)}"{timestamp}"',
         html
     )
 
