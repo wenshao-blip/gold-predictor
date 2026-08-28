@@ -59,8 +59,12 @@ def build_page_data() -> dict:
     conf_recorded = [r for r in records if r["confidence"] is not None]
     conf_settled = [r for r in settled if r["confidence"] is not None]
 
-    # 价格历史
+    # 价格历史（补充 cny 字段供图表使用）
+    fx_rate = collected.get("fx", {}).get("rate", 7.2)
     price_history = collected.get("price_history", [])
+    for p in price_history:
+        if "cny" not in p:
+            p["cny"] = round(p.get("usd", 0) * fx_rate / 31.1035, 2)
 
     # 胜率历史（累计）
     win_rate_history = []
