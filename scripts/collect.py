@@ -100,68 +100,77 @@ def fetch_usd_cny() -> dict:
 
 # ==================== 新闻 ====================
 
-def fetch_news(queries: list = None) -> list:
+# 6 个新闻分类，每类一个搜索 query，取前 4 条
+NEWS_CATEGORIES = [
+    {"key": "market", "name": "市场行情", "query": "gold price XAU USD today analysis forecast"},
+    {"key": "fed", "name": "美联储与美元", "query": "Federal Reserve interest rate US dollar gold impact"},
+    {"key": "geopolitical", "name": "地缘政治", "query": "gold safe haven demand geopolitical risk 2026"},
+    {"key": "central_bank", "name": "央行与持仓", "query": "central bank gold buying reserves ETF holdings 2026"},
+    {"key": "china", "name": "中国经济", "query": "China gold demand PBOC reserves Chinese economy"},
+    {"key": "afternoon", "name": "午后动态", "query": "gold price latest update today market movement"},
+]
+
+def _search_tavily(query: str, max_results: int = 4) -> list:
+    """调用 Tavily API 搜索单条 query，返回新闻列表。"""
+    api_key = os.environ.get("TAVILY_API_KEY", "")
+    if not api_key:
+        return []
+    try:
+        resp = requests.post(
+            "https://api.tavily.com/search",
+            headers={"Content-Type": "application/json"},
+            json={
+                "api_key": api_key,
+                "query": query,
+                "search_depth": "basic",
+                "topic": "news",
+                "max_results": max_results,
+                "include_raw_content": False,
+            },
+            timeout=30
+        )
+        if resp.status_code != 200:
+            log.error(f"新闻搜索失败 '{query}': HTTP {resp.status_code} - {resp.text[:200]}")
+            return []
+        data = resp.json()
+        results = []
+        for item in data.get("results", []):
+            results.append({
+                "source": item.get("source", "unknown"),
+                "title": item.get("title", ""),
+                "url": item.get("url", ""),
+                "snippet": item.get("content", "")[:200],
+                "published_date": item.get("published_date", ""),
+            })
+        log.info(f"新闻搜索 '{query}': {len(results)} 条结果")
+        return results
+    except Exception as e:
+        log.error(f"新闻搜索失败 '{query}': {e}")
+        return []
+
+
+def fetch_news() -> dict:
     """
-    使用 Tavily API 搜索黄金相关新闻。
-    需要 TAVILY_API_KEY 环境变量。
-    返回: [{source, title, url, snippet, published_date}, ...]
+    按 6 个分类分别搜索黄金新闻。
+    返回: {category_key: {"name": str, "items": [news_item, ...]}, ...}
     """
     api_key = os.environ.get("TAVILY_API_KEY", "")
     if not api_key:
         log.warning("TAVILY_API_KEY 未设置，跳过新闻采集")
-        return []
+        return {}
 
-    if queries is None:
-        queries = [
-            "gold price XAU USD today",
-            "Federal Reserve interest rate decision",
-            "central bank gold buying 2026",
-            "gold safe haven demand geopolitical",
-            "China gold demand PBOC reserves",
-        ]
+    categories = {}
+    total = 0
+    for cat in NEWS_CATEGORIES:
+        items = _search_tavily(cat["query"], max_results=4)
+        categories[cat["key"]] = {
+            "name": cat["name"],
+            "items": items,
+        }
+        total += len(items)
 
-    all_news = []
-    for query in queries:
-        try:
-            resp = requests.post(
-                "https://api.tavily.com/search",
-                headers={"Content-Type": "application/json"},
-                json={
-                    "api_key": api_key,
-                    "query": query,
-                    "search_depth": "basic",
-                    "topic": "news",
-                    "max_results": 5,
-                    "include_raw_content": False,
-                },
-                timeout=30
-            )
-            if resp.status_code != 200:
-                log.error(f"新闻搜索失败 '{query}': HTTP {resp.status_code} - {resp.text[:200]}")
-                continue
-            data = resp.json()
-            for item in data.get("results", []):
-                all_news.append({
-                    "source": item.get("source", "unknown"),
-                    "title": item.get("title", ""),
-                    "url": item.get("url", ""),
-                    "snippet": item.get("content", "")[:200],
-                    "published_date": item.get("published_date", ""),
-                })
-            log.info(f"新闻搜索 '{query}': {len(data.get('results', []))} 条结果")
-        except Exception as e:
-            log.error(f"新闻搜索失败 '{query}': {e}")
-
-    # 去重
-    seen = set()
-    unique = []
-    for n in all_news:
-        if n["title"] not in seen:
-            seen.add(n["title"])
-            unique.append(n)
-
-    log.info(f"新闻采集完成: {len(unique)} 条")
-    return unique
+    log.info(f"新闻采集完成: {total} 条 / {len(categories)} 类")
+    return categories
 
 # ==================== 价格历史 ====================
 
@@ -242,7 +251,15 @@ def run_collection():
     }
 
     save_data("collected.json", collected)
-    log.info(f"采集完成: 金价={gold.get('usd_per_oz')}, VIX={vix.get('value')}, 新闻={len(news)}条, 历史={len(history)}天")
+    # 统计新闻总数
+    news_count = 0
+    if isinstance(news, dict):
+        for cat_data in news.values():
+            news_count += len(cat_data.get("items", []))
+    else:
+        news_count = len(news) if news else 0
+
+    log.info(f"采集完成: 金价={gold.get('usd_per_oz')}, VIX={vix.get('value')}, 新闻={news_count}条, 历史={len(history)}天")
     log.info("===== 数据采集完成 =====")
     return collected
 

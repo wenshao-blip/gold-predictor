@@ -159,6 +159,7 @@ def build_page_data() -> dict:
         "glossary": prediction.get("glossary", []),
         "professionalText": prediction.get("professional_analysis", ""),
         "history": history_list,
+        "newsCategories": collected.get("news", {}),
         "news": collected.get("news", []),
     }
 
