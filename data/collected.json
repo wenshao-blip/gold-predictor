@@ -1,43 +1,29 @@
 {
-  "timestamp": "2026-09-15 06:39",
+  "timestamp": "2026-09-16 06:36",
   "gold_price": {
-    "usd_per_oz": 4297.0,
-    "timestamp": "2026-09-15 06:39",
+    "usd_per_oz": 4298.5,
+    "timestamp": "2026-09-16 06:36",
     "source": "gold-api.com"
   },
   "vix": {
-    "value": 17.1,
-    "timestamp": "2026-09-15 06:39"
+    "value": 17.2,
+    "timestamp": "2026-09-16 06:36"
   },
   "fx": {
-    "rate": 6.715584,
-    "timestamp": "2026-09-15 06:39"
+    "rate": 6.725199,
+    "timestamp": "2026-09-16 06:36"
   },
-  "cny_per_gram": 927.77,
+  "cny_per_gram": 929.42,
   "news": {
     "market": {
       "name": "市场行情",
       "items": [
         {
           "source": "unknown",
-          "title": "Short-Term Analysis for Oil, Gold, and EURUSD for 14.09.2026",
+          "title": "Technical analysis of US Crude, XAUUSD and EURUSD for Today (September 14, 2026) | LiteFinance",
           "url": "https://www.litefinance.org/blog/analysts-opinions/short-term-analysis-for-oil-gold-and-eurusd-for-14092026",
           "snippet": "### USCrude Trading Ideas for Today:\n\nHold part of the long trades opened at support A of 96.45–96.01. TakeProfit: 98.40, 100.75. StopLoss: at breakeven.\n\n## Gold Forecast for Today: XAUUSD Analysis\n\n",
           "published_date": "Mon, 14 Sep 2026 00:00:00 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Gold (XAU/USD) Price Forecast for Today, Tomorrow, Next Week, and the Next 30 Days",
-          "url": "https://www.litefinance.org/blog/analysts-opinions/gold-price-prediction-forecast/daily-and-weekly",
-          "snippet": "## Gold Price Prediction for Next 30 Days\n\nIn September 2026, analysts expect gold to range from $4,136.00 to $5,304.00. By the end of the month, the price is projected to rise to $5,051.00, while the",
-          "published_date": "Fri, 11 Sep 2026 00:00:00 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Gold Price Forecast: XAU/USD holds below $4,400 with Oil, yields surging",
-          "url": "https://www.tmgm.com/en/analysis/market-news/article/gold-price-forecast-xau-usd-holds-below-4-400-with-oil-yields-surging-202609100956",
-          "snippet": "TMGM Logo\n\nTMGMAnalysis\n\n# Gold Price Forecast: XAU/USD holds below $4,400 with Oil, yields surging\n\nAuthor: Guillermo Alcala, FXStreet\n\nLast Updated: 10 Sep 2026\n\nMake us preferred on Google\n\n XAU/US",
-          "published_date": "Thu, 10 Sep 2026 01:56:43 GMT"
         },
         {
           "source": "unknown",
@@ -45,6 +31,20 @@
           "url": "https://www.fxstreet.com/analysis/gold-price-forecast-feds-rate-decision-to-drive-xau-usds-next-move-202609140349",
           "snippet": "In the daily chart, XAU/USD trades at $4,330.30, holding below the 20-period exponential moving average (EMA) at $4,393.82, which keeps the near-term bias tilted to the bearish side. The metal has ret",
           "published_date": "Mon, 14 Sep 2026 03:49:58 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Technical analysis of US Crude, XAUUSD and EURUSD for Today (September 15, 2026)",
+          "url": "https://www.litefinance.org/blog/analysts-opinions/short-term-analysis-for-oil-gold-and-eurusd-for-15092026",
+          "snippet": "Hold part of the long trades opened at support A at 96.45–96.01. TakeProfit: 98.40, 100.75. StopLoss: at breakeven.\n\n## Gold Forecast for Today: XAUUSD Analysis [...] Major Takeaways\n Oil Price Foreca",
+          "published_date": "Tue, 15 Sep 2026 00:00:00 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Gold (XAUUSD) Price Forecast: 10-Year Yield Above 5% Keeps ...",
+          "url": "https://www.fxempire.com/forecasts/article/gold-xauusd-price-forecast-10-year-yield-above-5-keeps-sellers-in-control-1627978",
+          "snippet": "Search Icon\n\nFXEMPIRE\nFXEMPIRE\n\nprimex logo\nprimex logo\n\nprimex logo\nprimex logo\n\nPaybis Logo\nPaybis Logo\n\narrow-forward-icon\narrow-forward-icon\nPremium article badge\n\n# Gold (XAUUSD) Price Forecast: ",
+          "published_date": "Tue, 15 Sep 2026 11:00:00 GMT"
         }
       ]
     },
@@ -56,7 +56,7 @@
           "title": "Gold Slips as Fed Rate Hike Bets and US-Iran Tensions Bolster Dollar | Forex News Federal Reserve | CryptoRank.io",
           "url": "https://cryptorank.io/news/feed/51228-gold-declines-fed-rate-hike-us-iran-tensions",
           "snippet": "Anticipation of a Federal Reserve 25‑basis‑point rate hike and escalating US–Iran tensions have strengthened the US dollar to its highest level in several weeks, pushing gold lower as higher yields in",
-          "published_date": "Mon, 31 Aug 2026 22:00:00 GMT"
+          "published_date": "Tue, 01 Sep 2026 22:00:00 GMT"
         },
         {
           "source": "unknown",
@@ -74,10 +74,10 @@
         },
         {
           "source": "unknown",
-          "title": "Gold rises 2% as Fed holds rates steady, markets parse Warsh's comments",
-          "url": "https://www.reuters.com/world/asia-pacific/gold-edges-lower-ahead-fed-decision-interest-rates-2026-07-29",
-          "snippet": "Skip to main content\n\nExclusive news, data and analytics for financial market professionals Learn more about Refinitiv\n\n - Gold erased earlier losses to rise 2% on Wednesday, after the U.S. ‌Federal R",
-          "published_date": "Wed, 29 Jul 2026 01:14:50 GMT"
+          "title": "US August Retail Sales Preview: Spending May Rebound",
+          "url": "https://www.tradingkey.com/analysis/economic/indicators/262167988-us-august-retail-sales-preview-consumption-may-rebound-us-stocks-dollar-gold-ahead-fed-decision-tradingkey",
+          "snippet": "For gold (XAUUSD), the impact of retail sales on gold is mainly transmitted through the U.S. dollar, U.S. Treasury yields, and Fed interest rate expectations. If August data is significantly stronger ",
+          "published_date": "Tue, 15 Sep 2026 06:00:00 GMT"
         }
       ]
     },
@@ -93,10 +93,10 @@
         },
         {
           "source": "unknown",
-          "title": "Gold ETFs in 2026: How to Own the World's Oldest Safe Haven",
-          "url": "https://www.etf.com/sections/news/gold-etfs-2026-how-own-worlds-oldest-safe-haven",
-          "snippet": "Layered on top of that are the unpredictable but potential chance of Fed rate cuts later this year, a weaker dollar compared to pre-2025 levels, persistent inflation concerns, questions about the Fed'",
-          "published_date": "Thu, 11 Jun 2026 17:12:32 GMT"
+          "title": "Gold Holds Firm Amid Rate Hike Concerns and Geopolitical Tensions",
+          "url": "https://www.kucoin.com/news/flash/gold-resists-pressure-amid-rate-hike-fears-and-geopolitical-tensions",
+          "snippet": "Rising interest rate expectations, a stronger U.S. dollar, and higher oil prices have collectively exerted short-term downward pressure on gold prices. However, safe-haven demand driven by geopolitica",
+          "published_date": "Tue, 15 Sep 2026 08:05:18 GMT"
         },
         {
           "source": "unknown",
@@ -110,7 +110,7 @@
           "title": "Gold price prediction today: Will gold, silver continue to be volatile? Check September 9, 2026 outlook",
           "url": "https://timesofindia.indiatimes.com/business/india-business/gold-price-prediction-today-india-where-is-gold-silver-rate-headed-on-september-09-2026-mcx-gold-futures-outlook-us-iran-war-middle-east-tensions/articleshow/133959296.cms",
           "snippet": "been one of the more notable developments this week. Geopolitical risk is currently working through two opposing channels: direct safe-haven demand is supporting bullion, while higher oil prices are i",
-          "published_date": "Wed, 09 Sep 2026 18:00:00 GMT"
+          "published_date": "Wed, 09 Sep 2026 03:00:00 GMT"
         }
       ]
     },
@@ -152,7 +152,7 @@
       "items": [
         {
           "source": "unknown",
-          "title": "How much gold will be enough to diversify China's reserves? - Reuters",
+          "title": "How much gold will be enough to diversify China's reserves? | Reuters",
           "url": "https://www.reuters.com/world/china/how-much-gold-will-be-enough-diversify-chinas-reserves-2025-09-02",
           "snippet": "China's economy, as measured by nominal gross domestic product, amounts to 64% of U.S. GDP. Applying this percentage to U.S. gold reserves of 8,133.5 would mean China's gold reserves should be 5,205 t",
           "published_date": "Tue, 02 Sep 2025 13:58:59 GMT"
@@ -216,294 +216,294 @@
   },
   "price_history": [
     {
-      "date": "2026-06-23",
-      "usd": 4129.9,
+      "date": "2026-06-24",
+      "usd": 4008.8,
       "chg": 0
     },
     {
-      "date": "2026-06-24",
-      "usd": 3990.3,
-      "chg": -3.38
-    },
-    {
       "date": "2026-06-25",
-      "usd": 4030.5,
-      "chg": 1.01
+      "usd": 4047.6,
+      "chg": 0.97
     },
     {
       "date": "2026-06-26",
-      "usd": 4078.7,
+      "usd": 4096.3,
       "chg": 1.2
     },
     {
       "date": "2026-06-29",
-      "usd": 4022.3,
-      "chg": -1.38
+      "usd": 4038.9,
+      "chg": -1.4
     },
     {
       "date": "2026-06-30",
-      "usd": 4022.9,
-      "chg": 0.01
+      "usd": 4038.5,
+      "chg": -0.01
     },
     {
       "date": "2026-07-01",
-      "usd": 4068.3,
-      "chg": 1.13
-    },
-    {
-      "date": "2026-07-02",
-      "usd": 4112.7,
+      "usd": 4082.4,
       "chg": 1.09
     },
     {
+      "date": "2026-07-02",
+      "usd": 4125.7,
+      "chg": 1.06
+    },
+    {
       "date": "2026-07-06",
-      "usd": 4155.1,
-      "chg": 1.03
+      "usd": 4167.5,
+      "chg": 1.01
     },
     {
       "date": "2026-07-07",
-      "usd": 4145.3,
+      "usd": 4157.4,
       "chg": -0.24
     },
     {
       "date": "2026-07-08",
-      "usd": 4070.9,
-      "chg": -1.79
+      "usd": 4082.4,
+      "chg": -1.8
     },
     {
       "date": "2026-07-09",
-      "usd": 4130.6,
-      "chg": 1.47
+      "usd": 4140.8,
+      "chg": 1.43
     },
     {
       "date": "2026-07-10",
-      "usd": 4104.1,
-      "chg": -0.64
+      "usd": 4113.7,
+      "chg": -0.65
     },
     {
       "date": "2026-07-13",
-      "usd": 3997.0,
-      "chg": -2.61
+      "usd": 4005.7,
+      "chg": -2.63
     },
     {
       "date": "2026-07-14",
-      "usd": 4061.1,
+      "usd": 4069.7,
       "chg": 1.6
     },
     {
       "date": "2026-07-15",
-      "usd": 4044.0,
-      "chg": -0.42
+      "usd": 4051.8,
+      "chg": -0.44
     },
     {
       "date": "2026-07-16",
-      "usd": 3985.6,
-      "chg": -1.44
+      "usd": 3992.1,
+      "chg": -1.47
     },
     {
       "date": "2026-07-17",
-      "usd": 4012.7,
-      "chg": 0.68
+      "usd": 4018.8,
+      "chg": 0.67
     },
     {
       "date": "2026-07-20",
-      "usd": 4010.3,
-      "chg": -0.06
+      "usd": 4015.9,
+      "chg": -0.07
     },
     {
       "date": "2026-07-21",
-      "usd": 4071.1,
-      "chg": 1.52
+      "usd": 4076.4,
+      "chg": 1.51
     },
     {
       "date": "2026-07-22",
-      "usd": 4146.9,
-      "chg": 1.86
+      "usd": 4151.9,
+      "chg": 1.85
     },
     {
       "date": "2026-07-23",
-      "usd": 4046.6,
-      "chg": -2.42
+      "usd": 4050.2,
+      "chg": -2.45
     },
     {
       "date": "2026-07-24",
-      "usd": 4067.6,
-      "chg": 0.52
+      "usd": 4070.8,
+      "chg": 0.51
     },
     {
       "date": "2026-07-27",
-      "usd": 4074.5,
-      "chg": 0.17
+      "usd": 4077.0,
+      "chg": 0.15
     },
     {
       "date": "2026-07-28",
-      "usd": 4036.3,
+      "usd": 4038.7,
       "chg": -0.94
     },
     {
       "date": "2026-07-29",
-      "usd": 4034.7,
-      "chg": -0.04
+      "usd": 4036.3,
+      "chg": -0.06
     },
     {
       "date": "2026-07-30",
       "usd": 4100.1,
-      "chg": 1.62
+      "chg": 1.58
     },
     {
       "date": "2026-07-31",
-      "usd": 4049.1,
-      "chg": -1.24
+      "usd": 4107.0,
+      "chg": 0.17
     },
     {
       "date": "2026-08-03",
-      "usd": 4033.7,
-      "chg": -0.38
+      "usd": 4090.5,
+      "chg": -0.4
     },
     {
       "date": "2026-08-04",
-      "usd": 4095.4,
-      "chg": 1.53
+      "usd": 4152.6,
+      "chg": 1.52
     },
     {
       "date": "2026-08-05",
-      "usd": 4245.8,
+      "usd": 4305.2,
       "chg": 3.67
     },
     {
       "date": "2026-08-06",
-      "usd": 4242.0,
-      "chg": -0.09
+      "usd": 4299.6,
+      "chg": -0.13
     },
     {
       "date": "2026-08-07",
-      "usd": 4340.7,
+      "usd": 4399.7,
       "chg": 2.33
     },
     {
       "date": "2026-08-10",
-      "usd": 4361.8,
-      "chg": 0.49
+      "usd": 4419.7,
+      "chg": 0.45
     },
     {
       "date": "2026-08-11",
-      "usd": 4383.0,
-      "chg": 0.49
+      "usd": 4441.1,
+      "chg": 0.48
     },
     {
       "date": "2026-08-12",
-      "usd": 4408.9,
+      "usd": 4467.5,
       "chg": 0.59
     },
     {
       "date": "2026-08-13",
-      "usd": 4363.6,
-      "chg": -1.03
+      "usd": 4420.4,
+      "chg": -1.05
     },
     {
       "date": "2026-08-14",
-      "usd": 4380.4,
-      "chg": 0.39
+      "usd": 4437.3,
+      "chg": 0.38
     },
     {
       "date": "2026-08-17",
-      "usd": 4417.8,
-      "chg": 0.85
+      "usd": 4473.7,
+      "chg": 0.82
     },
     {
       "date": "2026-08-18",
-      "usd": 4366.0,
-      "chg": -1.17
+      "usd": 4420.6,
+      "chg": -1.19
     },
     {
       "date": "2026-08-19",
-      "usd": 4489.4,
-      "chg": 2.83
+      "usd": 4545.3,
+      "chg": 2.82
     },
     {
       "date": "2026-08-20",
-      "usd": 4516.3,
-      "chg": 0.6
+      "usd": 4571.4,
+      "chg": 0.57
     },
     {
       "date": "2026-08-21",
-      "usd": 4624.1,
+      "usd": 4680.6,
       "chg": 2.39
     },
     {
       "date": "2026-08-24",
-      "usd": 4640.8,
-      "chg": 0.36
+      "usd": 4697.8,
+      "chg": 0.37
     },
     {
       "date": "2026-08-25",
-      "usd": 4638.1,
-      "chg": -0.06
+      "usd": 4694.5,
+      "chg": -0.07
     },
     {
       "date": "2026-08-26",
-      "usd": 4598.2,
-      "chg": -0.86
+      "usd": 4653.3,
+      "chg": -0.88
     },
     {
       "date": "2026-08-27",
-      "usd": 4609.7,
-      "chg": 0.25
+      "usd": 4664.0,
+      "chg": 0.23
     },
     {
       "date": "2026-08-28",
-      "usd": 4478.1,
-      "chg": -2.85
+      "usd": 4529.9,
+      "chg": -2.88
     },
     {
       "date": "2026-08-31",
-      "usd": 4431.1,
-      "chg": -1.05
+      "usd": 4481.5,
+      "chg": -1.07
     },
     {
       "date": "2026-09-01",
-      "usd": 4348.0,
-      "chg": -1.88
+      "usd": 4396.4,
+      "chg": -1.9
     },
     {
       "date": "2026-09-02",
-      "usd": 4366.3,
-      "chg": 0.42
+      "usd": 4414.6,
+      "chg": 0.41
     },
     {
       "date": "2026-09-03",
-      "usd": 4491.7,
-      "chg": 2.87
+      "usd": 4539.9,
+      "chg": 2.84
     },
     {
       "date": "2026-09-04",
-      "usd": 4429.8,
-      "chg": -1.38
+      "usd": 4476.6,
+      "chg": -1.39
     },
     {
       "date": "2026-09-08",
-      "usd": 4393.9,
-      "chg": -0.81
+      "usd": 4439.0,
+      "chg": -0.84
     },
     {
       "date": "2026-09-09",
-      "usd": 4416.0,
-      "chg": 0.5
+      "usd": 4460.7,
+      "chg": 0.49
     },
     {
       "date": "2026-09-10",
-      "usd": 4364.5,
-      "chg": -1.17
+      "usd": 4407.3,
+      "chg": -1.2
     },
     {
       "date": "2026-09-11",
       "usd": 4408.9,
-      "chg": 1.02
+      "chg": 0.04
     },
     {
       "date": "2026-09-14",
-      "usd": 4336.4,
-      "chg": -1.64
+      "usd": 4351.9,
+      "chg": -1.29
+    },
+    {
+      "date": "2026-09-15",
+      "usd": 4336.8,
+      "chg": -0.35
     }
   ]
 }
