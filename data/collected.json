@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-11-14 10:33",
+  "timestamp": "2026-11-15 10:01",
   "gold_price": {
     "usd_per_oz": 3887.600098,
-    "timestamp": "2026-11-14 10:33",
+    "timestamp": "2026-11-15 10:01",
     "source": "gold-api.com"
   },
   "vix": {
     "value": 19.3,
-    "timestamp": "2026-11-14 10:33"
+    "timestamp": "2026-11-15 10:01"
   },
   "fx": {
-    "rate": 6.684938,
-    "timestamp": "2026-11-14 10:33"
+    "rate": 6.689676,
+    "timestamp": "2026-11-15 10:01"
   },
-  "cny_per_gram": 835.54,
+  "cny_per_gram": 836.14,
   "news": {
     "market": {
       "name": "市场行情",
       "items": [
         {
           "source": "unknown",
-          "title": "Gold Forecast: XAU/USD remains a sell-on-rise trade amid steeper Fed hike bets",
-          "url": "https://www.fxstreet.com/analysis/gold-price-forecast-xau-usd-remains-a-sell-on-rise-trade-amid-steeper-fed-hike-bets-202611120339",
-          "snippet": "On the topside, initial resistance appears at the 21-day SMA around $4,049.60, followed by the 23.6% Fibonacci retracement at $4,065.07, with a more significant barrier emerging at the 50-day SMA near",
-          "published_date": "Thu, 12 Nov 2026 03:39:59 GMT"
+          "title": "Gold Forecast: XAU/USD eyes US PCE inflation data for next move",
+          "url": "https://www.fxstreet.com/analysis/gold-price-forecast-xau-usd-eyes-us-pce-inflation-data-for-next-move-202609300349",
+          "snippet": "In the daily chart, XAU/USD trades at $4,175.27, extending its retreat below all the major simple moving averages and keeping a bearish near-term bias in place. The 21-day SMA at $4,320.18, the 50-day",
+          "published_date": "Wed, 30 Sep 2026 03:49:41 GMT"
         },
         {
           "source": "unknown",
@@ -37,14 +37,14 @@
           "title": "Gold (XAU/USD) Price Forecast: Dollar Strength Extends Downside Targets | FXEmpire",
           "url": "https://www.fxempire.com/forecasts/article/gold-xau-usd-price-forecast-dollar-strength-extends-downside-targets-2-1644653",
           "snippet": "Although support could continue to hold above Thursday’s new low of $3,852, rallies from here are likely to encounter resistance that turns gold back down, with the potential for new lows. Two key pot",
-          "published_date": "Sat, 14 Nov 2026 02:00:00 GMT"
+          "published_date": "Sat, 14 Nov 2026 06:00:00 GMT"
         },
         {
           "source": "unknown",
           "title": "Gold (XAUUSD) & Silver Price Forecast: Gold Bounces From One-Year Low, Can It Clear $3,903? | FXEmpire",
           "url": "https://www.fxempire.com/forecasts/article/gold-xauusd-silver-price-forecast-gold-bounces-from-one-year-low-can-it-clear-3903-1644413",
           "snippet": "Gold rose 1.1% to $3,918.59 on Friday after hitting its lowest since October 2025, but remains on track for a weekly decline as Fed hike bets build, Reuters reported.\n Gold trades near $3,896 after bu",
-          "published_date": "Fri, 13 Nov 2026 07:00:00 GMT"
+          "published_date": "Sat, 14 Nov 2026 02:00:00 GMT"
         }
       ]
     },
@@ -105,20 +105,6 @@
       "items": [
         {
           "source": "unknown",
-          "title": "298 Tonnes of ETF Gold Is Underwater. Central Banks Aren't.",
-          "url": "https://goldsilver.com/industry-news/goldsilver-news/gold-etf-outflows-central-bank-buying-divergence-2026",
-          "snippet": "### Who is buying on the other side?\n\nHere is where the two markets stop talking to each other. The World Gold Council’s 2026 Central Bank Gold Reserves Survey was published June 16. It found that 89%",
-          "published_date": "Thu, 25 Jun 2026 13:56:47 GMT"
-        },
-        {
-          "source": "unknown",
-          "title": "Central bank gold statistics: Momentum eases in January while demand base broadens | Post by Marissa Salim | Insights | World Gold Council",
-          "url": "https://www.gold.org/goldhub/gold-focus/2026/03/central-bank-gold-statistics-momentum-eases-january-while-demand-base",
-          "snippet": "The Bank of Korea (BOK) announced plans to incorporate overseas-listed physical gold ETFs into its foreign reserve portfolio from Q1 2026, marking its first gold-related investment since 2013. The BOK",
-          "published_date": "Tue, 03 Mar 2026 00:00:00 GMT"
-        },
-        {
-          "source": "unknown",
           "title": "Central bank gold statistics: Central banks remain committed to gold | Post by Marissa Salim | Insights | World Gold Council",
           "url": "https://www.gold.org/goldhub/gold-focus/2026/07/central-bank-gold-statistics-central-banks-remain-committed-gold",
           "snippet": "### Chart 3: Year-to-date central bank gold activity\n\nCentral bank net purchases and sales, tonnes\\\n\n   Year-to-date central bank gold activity  \n\n\\Data to 30 June 2026, where available. Note: The Bul",
@@ -130,6 +116,20 @@
           "url": "https://www.kitco.com/news/article/2026-07-30/gold-demand-proves-resilient-despite-q2-selloff-central-banks-return-and",
           "snippet": "The World Gold Council said the rebound reinforces the long-term structural case for central bank gold buying, even though total purchases for 2026 are expected to finish below last year's record pace",
           "published_date": "Thu, 30 Jul 2026 17:25:23 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "China's Gold Reserves Hit a New Record in August 2026",
+          "url": "https://goldsilver.com/industry-news/goldsilver-news/pboc-gold-reserves-august-2026-22-months",
+          "snippet": "#### What Do Other Reserve Managers Think Is Coming?\n\nMost of them expect the buying to continue. The World Gold Council’s 2026 Central Bank Gold Reserves Survey found that 89% of central bank respond",
+          "published_date": "Mon, 07 Sep 2026 13:53:33 GMT"
+        },
+        {
+          "source": "unknown",
+          "title": "Gold’s correction prompts a forecast reset | ING THINK",
+          "url": "https://think.ing.com/articles/golds-correction-prompts-a-forecast-reset",
+          "snippet": "- Source: WGC, ING Research \n\nSource: WGC, ING Research\n\n## Central banks continue to provide support\n\nWhile investor demand has weakened, central bank buying remains a key pillar of support.\n\nCentral",
+          "published_date": "Wed, 24 Jun 2026 00:00:00 GMT"
         }
       ]
     },
@@ -138,31 +138,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "China’s gold market in October: wholesale demand weakened, gold reserve rose | Post by Ray Jia | Insights | World Gold Council",
-          "url": "https://www.gold.org/goldhub/gold-focus/2023/11/chinas-gold-market-october-wholesale-demand-weakened-gold-reserve-rose",
-          "snippet": "The PBoC’s gold reserves rose by 23t in October to 2,215t, extending its buying spree to twelve months (Chart 7). This pushed gold’s share in China’s total foreign exchange reserves to 4.3%, an all-ti",
-          "published_date": "Wed, 15 Nov 2023 00:00:00 GMT"
+          "title": "Central banks pile into gold as China leads buying spree - Mining.com",
+          "url": "https://www.mining.com/central-banks-pile-into-gold-as-china-leads-buying-spree/",
+          "snippet": "Silver Futures $ 75.495 / ozt  7.47%. Micro Gold Futures $ 4713.1 / ozt  3.80%. Micro Silver Futures $ 75.48 / ozt  7.54%. Gold Futures $ 4713.3 / ozt  3.84%. The People’s Bank of China. Central banks",
+          "published_date": "Fri, 23 Oct 2026 13:10:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "China gold market update: A seasonal demand rebound in March | Post by Ray Jia | Insights | World Gold Council",
-          "url": "https://www.gold.org/goldhub/gold-focus/2026/04/china-gold-market-update-seasonal-demand-rebound-march",
-          "snippet": "The PBoC announced its 17th consecutive monthly gold purchase in March. This 5t addition, the largest since February 2025, pushed China’s official gold holdings to 2,313t (Chart 5). Gold now accounts ",
-          "published_date": "Tue, 14 Apr 2026 00:00:00 GMT"
+          "title": "China ramps up gold buying as prices fall - Shanghai Metals Market",
+          "url": "https://news.metal.com/en/newscontent/104152264-china-ramps-up-gold-buying-as-prices-fall",
+          "snippet": "China stepped up its gold purchases in September, with its central bank recording the largest monthly increase in reserves in three years as bullion prices weakened. The People’s Bank of China (PBOC) ",
+          "published_date": "Mon, 12 Oct 2026 05:21:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "China’s gold market in July: gold reserves rise for the ninth consecutive month, wholesale demand tepid | Post by Ray Jia | Insights | World Gold Council",
-          "url": "https://www.gold.org/goldhub/gold-focus/2023/08/chinas-gold-market-july-gold-reserves-rise-ninth-consecutive-month",
-          "snippet": "### The PBoC announced another increase in its gold reserves\n\nThe PBoC reported another 23t rise in its gold reserves in July, lifting the total to 2,136t and marking the ninth consecutive monthly inc",
-          "published_date": "Wed, 09 Aug 2023 00:00:00 GMT"
+          "title": "China Central Bank adds most gold since 2023 even as prices jump - Mining.com",
+          "url": "https://www.mining.com/web/china-central-bank-adds-most-gold-since-2023-even-as-prices-jump/",
+          "snippet": "Brent Crude Oil $ 104.4 / bbl  -4.21%. Crude Oil $ 101.85 / bbl  -3.06%. Silver Futures $ 75.495 / ozt  7.47%. Micro Gold Futures $ 4713.1 / ozt  3.80%. Micro Silver Futures $ 75.48 / ozt  7.54%. Plat",
+          "published_date": "Mon, 07 Sep 2026 22:50:45 GMT"
         },
         {
           "source": "unknown",
-          "title": "China’s gold market in June: wholesale demand stable and gold reserves up | Post by Ray Jia | Insights | World Gold Council",
-          "url": "https://www.gold.org/goldhub/gold-focus/2023/07/chinas-gold-market-june-wholesale-demand-stable-and-gold-reserves",
-          "snippet": "Source: ETF providers, Shanghai Gold Exchange, World Gold Council\n\n### The PBoC reported its eighth consecutive gold reserve increase in June\n\nThe PBoC reported a 21t addition to its gold reserves in ",
-          "published_date": "Fri, 14 Jul 2023 00:00:00 GMT"
+          "title": "China’s central bank buys 21 tonnes of gold in September, largest monthly purchase in 3 years - Kitco",
+          "url": "https://www.kitco.com/news/article/2026-10-07/chinas-central-bank-buys-21-tonnes-gold-september-largest-monthly-purchase",
+          "snippet": "# China’s central bank buys 21 tonnes of gold in September, largest monthly purchase in 3 years. Kitco NEWS has a diverse team of journalists reporting on the economy, stock markets, commodities, cryp",
+          "published_date": "Wed, 07 Oct 2026 10:36:00 GMT"
         }
       ]
     },
@@ -171,31 +171,31 @@
       "items": [
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-24-2025-spot-gold-smashes-4500-to-a-fresh-record-as-safe-haven-demand-surges/",
-          "snippet": "# Gold Price Today (Dec. 24, 2025): Spot Gold Smashes $4,500 to a Fresh Record as Safe‑Haven Demand Surges. Meanwhile, broader market coverage from Reuters on Dec. 24 underscored that gold and silver ",
-          "published_date": "Wed, 24 Dec 2025 09:15:19 GMT"
+          "title": "Rate-hike bets keep gold on track for its worst week in four months | Forex Factory",
+          "url": "https://www.forexfactory.com/news/1436306-rate-hike-bets-keep-gold-on-track-for-its",
+          "snippet": "Gold Price Today: $3,879 Saturday Week Ahead, FOMC Minutes and Retail Sales, Bull $4,000, Bear $3,800\n\nFrom financefeeds.com | 21 min ago [...] The selling was about interest rates. A hotter than expe",
+          "published_date": "Sat, 14 Nov 2026 07:00:00 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today (Dec. 24, 2025, 1:32 PM ET Update): Spot Gold Near $4,493 After Record $4,525 — Latest News, Forecasts and Analysis - ts2.tech",
-          "url": "https://ts2.tech/en/gold-price-today-dec-24-2025-132-pm-et-update-spot-gold-near-4493-after-record-4525-latest-news-forecasts-and-analysis/",
-          "snippet": "# Gold Price Today (Dec. 24, 2025, 1:32 PM ET Update): Spot Gold Near $4,493 After Record $4,525 — Latest News, Forecasts and Analysis. **NEW YORK / LONDON — December 24, 2025** — The **gold price tod",
-          "published_date": "Wed, 24 Dec 2025 18:44:39 GMT"
+          "title": "Gold rises on bargain hunting but heads for weekly decline",
+          "url": "https://www.cnbc.com/2026/11/13/gold-rises-on-bargain-hunting-but-heads-for-weekly-decline.html",
+          "snippet": "\"Today's move is more of a positioning adjustment, given that several intraday short-term momentum indicators had kind of hit an extreme oversold level after yesterday's dramatic fall,\" said Kelvin Wo",
+          "published_date": "Fri, 13 Nov 2026 04:43:52 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today: Gold Surges Past $5,300 Amid US-Iran Strikes; Domestic Prices Jump ₹3,160 to ₹1.64 Lakh/10g | Check City-Wise Rates - The Sunday Guardian",
-          "url": "https://sundayguardianlive.com/business/gold-price-today-28-feb-2026-gold-surges-past-5300-amid-us-iran-strikes-domestic-prices-jump-3160-to-164-lakh10g-check-city-wise-rates-173039/",
-          "snippet": "Copyright 2025 - All Right Reserved. Home > Business > Gold Price Today: Gold Surges Past $5,300 Amid US-Iran Strikes; Domestic Prices Jump ₹3,160 to ₹1.64 Lakh/10g | Check City-Wise Rates. **Gold Pri",
-          "published_date": "Sat, 28 Feb 2026 17:50:00 GMT"
+          "title": "Gold prices testing resistance at $3,900 as producers prices continue to rise | Kitco News",
+          "url": "https://www.kitco.com/news/article/2026-11-13/gold-prices-testing-resistance-3900-producers-prices-continue-rise",
+          "snippet": "The gold market caught a modest bid in its initial reaction to the latest inflation data; however, the precious metal is now testing initial resistance. Spot gold last traded at $3,897.90 an ounce, up",
+          "published_date": "Fri, 13 Nov 2026 13:41:43 GMT"
         },
         {
           "source": "unknown",
-          "title": "Gold Price Today on August 07, 2026 - usatoday.com",
-          "url": "https://www.usatoday.com/story/money/personalfinance/2026/08/07/gold-price-on-august-07-2026/91210890007/",
-          "snippet": "Gold Price Today on August 07, 2026. ## How much is gold per ounce today? As of Aug. 7, 2026, at 8:05 a.m. ET, the spot price of gold was **$4,323.50** per ounce, according to the latest market data. ",
-          "published_date": "Fri, 07 Aug 2026 12:20:16 GMT"
+          "title": "Gold Price Forecast: XAU/USD finds temporary floor near $3,850, downside risks persist",
+          "url": "https://www.fxstreet.com/analysis/gold-price-forecast-xau-usd-finds-temporary-floor-near-3-850-downside-risks-persist-202611130328",
+          "snippet": "Gold finds temporary floor near $3,850, downside risks persist\n\n#### Gold finds temporary floor near $3,850, downside risks persist\n\nGold rises almost 0.9% to near $3,915 in the early trade on Friday ",
+          "published_date": "Fri, 13 Nov 2026 03:28:32 GMT"
         }
       ]
     }
@@ -493,8 +493,8 @@
     },
     {
       "date": "2026-11-13",
-      "usd": 3887.6,
-      "chg": 0.06
+      "usd": 3886.3,
+      "chg": 0.03
     }
   ]
 }
